@@ -7,29 +7,48 @@ import {
 } from "../../../assets/styles/styledcomponents/component.js";
 
 class Authorization extends Component {
+  state = {
+    account: {
+      login: "",
+      password: ""
+    }
+  };
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ account });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log("Authorization hendle", this.state.account);
+  };
   render() {
     return (
       <BgAuthorization>
         <Title>Sign in</Title>
-        <form>
-          <div>
-            <Input
-              label="Your email"
-              icon="envelope"
-              group
-              type="email"
-              validate
-              error="wrong"
-              success="right"
-            />
-            <Input
-              label="Your password"
-              icon="lock"
-              group
-              type="password"
-              validate
-            />
-          </div>
+        <form onSubmit={this.handleSubmit}>
+          <Input
+            value={this.state.account.login}
+            autoFocus
+            onChange={this.handleChange}
+            label="Your login"
+            name="login"
+            icon="envelope"
+            group
+            validate
+            error="wrong"
+            success="right"
+          />
+          <Input
+            value={this.state.account.password}
+            onChange={this.handleChange}
+            label="Your password"
+            name="password"
+            icon="lock"
+            group
+            type="password"
+            validate
+          />
           <div className="text-center">
             <Button light>Login</Button>
           </div>

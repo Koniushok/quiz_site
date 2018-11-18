@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import imgFon from "../../assets/images/fon.jpg";
 
 //content
@@ -14,9 +14,15 @@ class Main extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/registration" component={Registration} />
         <Route path="/authorization" component={Authorization} />
+        <Route path="/not-found" component={Not_fount} />
+        <Redirect to="/not-found" />
       </Switch>
     );
   }
 }
+
+const Not_fount = () => {
+  return <p>not-found</p>;
+};
 
 export default Main;

@@ -3,10 +3,10 @@ import Header from "./components/header/header.jsx";
 import Footer from "./components/footer/footer.jsx";
 import Main from "./components/main/main.jsx";
 
+const bgColor = "#24292e";
+const minH = "72px";
 class App extends Component {
   render() {
-    const bgColor = "#24292e";
-    const minH = "72px";
     return (
       <React.Fragment>
         <Header bg={bgColor} minHeight={minH} />

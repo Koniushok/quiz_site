@@ -38,7 +38,7 @@ export const BtLink = styled.a`
   ${StButton};
 `;
 
-export const BtBlock = styled.a`
+export const BtBlock = styled.div`
   ${StButton};
   display: inline-block;
 `;

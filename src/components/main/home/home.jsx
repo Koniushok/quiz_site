@@ -10,10 +10,10 @@ class Home extends Component {
       <BgHome>
         <p>Val Quiz</p>
         <Link to="/authorization">
-          <BtBlock margin="10% 20px 0px 20px">Log in</BtBlock>
+          <BtBlock margin="10% 20px 0px 20px">Sign in</BtBlock>
         </Link>
         <Link to="/registration">
-          <BtBlock margin="10% 20px 0px 20px">Create an account</BtBlock>
+          <BtBlock margin="10% 20px 0px 20px">Sign up</BtBlock>
         </Link>
       </BgHome>
     );
