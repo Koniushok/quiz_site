@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { BgRegisration, FormRegistration } from "./style.js";
+import { API_END_POINT } from "../../../config/constants.js";
 import {
   Button,
   Title
@@ -61,7 +63,7 @@ class Registration extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (this.validate()) console.log("Registration hendle", this.state.account);
+    if (this.validate()) PostRegisration(this.state.account);
     else console.error("Registration hendle");
   };
   validate() {
@@ -114,5 +116,12 @@ class Registration extends Component {
     );
   }
 }
-
+async function PostRegisration(account) {
+  try {
+    const result = await axios.post(API_END_POINT + "/api/users", account);
+    console.log(result.data);
+  } catch (ex) {
+    console.log(ex.response.data);
+  }
+}
 export default Registration;

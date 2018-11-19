@@ -7,6 +7,4 @@ export const BgAuthorization = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
-  padding-top: 50px;
 `;

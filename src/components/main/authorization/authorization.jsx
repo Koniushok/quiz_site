@@ -36,6 +36,7 @@ class Authorization extends Component {
             icon="envelope"
             group
             validate
+            required
             error="wrong"
             success="right"
           />

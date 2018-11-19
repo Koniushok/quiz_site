@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import imgFon from "../../assets/images/fon.jpg";
 
-//content
+//content pages
 import Home from "./home/home.jsx";
 import Registration from "./registration/registration.jsx";
 import Authorization from "./authorization/authorization.jsx";

@@ -1,0 +1,5 @@
+{
+  "jwtKey": "Koniushok",
+  "db": "mongodb://localhost/quiz",
+  "port": "8080"
+}
