@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
   admin: Boolean
 });
 
+userSchema.methods.generateAuthToken = function() {
+  const token = jwt.sign(
+    { _id: this._id, admin: this.admin },
+    config.get("jwtKey")
+  );
+  return token;
+};
+
 function validateUser(user) {
   const schema = {
     login: Joi.string()

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { BgAuthorization } from "./style.js";
+import axios from "axios";
+import { API_END_POINT } from "../../../config/constants.js";
+import { BgAuthorization, FormAuth } from "./style.js";
 import { Input } from "mdbreact";
 import {
   Button,
@@ -11,7 +13,8 @@ class Authorization extends Component {
     account: {
       login: "",
       password: ""
-    }
+    },
+    error: ""
   };
   handleChange = e => {
     const account = { ...this.state.account };
@@ -20,13 +23,26 @@ class Authorization extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    this.postAuthorization();
     console.log("Authorization hendle", this.state.account);
+  };
+  postAuthorization = async () => {
+    try {
+      const result = await axios.post(
+        API_END_POINT + "/api/auth",
+        this.state.account
+      );
+      console.log(result.data);
+    } catch (ex) {
+      this.setState({ error: ex.response.data });
+    }
   };
   render() {
     return (
       <BgAuthorization>
-        <Title>Sign in</Title>
-        <form onSubmit={this.handleSubmit}>
+        <Alert error={this.state.error} />
+        <FormAuth onSubmit={this.handleSubmit}>
+          <Title>Sign in</Title>
           <Input
             value={this.state.account.login}
             autoFocus
@@ -47,16 +63,25 @@ class Authorization extends Component {
             name="password"
             icon="lock"
             group
+            required
             type="password"
             validate
           />
           <div className="text-center">
             <Button light>Login</Button>
           </div>
-        </form>
+        </FormAuth>
       </BgAuthorization>
     );
   }
 }
 
+const Alert = props => {
+  if (props.error)
+    return <div className="alert alert-danger">{props.error}</div>;
+  if (props.message)
+    return <div className="alert alert-success">{props.message}</div>;
+
+  return <React.Fragment />;
+};
 export default Authorization;

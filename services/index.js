@@ -1,5 +1,6 @@
 //routes
 const users = require("./routes/users");
+const auth = require("./routes/auth");
 //
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -19,6 +20,7 @@ app.use(
   })
 );
 app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 const port = process.env.PORT || config.get("port");
 app.listen(port, () => console.log(`Listening (port: ${port})`));

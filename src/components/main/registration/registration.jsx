@@ -54,7 +54,8 @@ class Registration extends Component {
       login: "",
       password: ""
     },
-    error: {}
+    error: { all: "123" },
+    result: ""
   };
   handleChange = ({ currentTarget: input }) => {
     const account = { ...this.state.account };
@@ -63,7 +64,7 @@ class Registration extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (this.validate()) PostRegisration(this.state.account);
+    if (this.validate()) this.PostRegisration(this.state.account);
     else console.error("Registration hendle");
   };
   validate() {
@@ -79,9 +80,22 @@ class Registration extends Component {
     this.setState({ error });
     return test;
   }
+  PostRegisration = async account => {
+    try {
+      const result = await axios.post(API_END_POINT + "/api/users", account);
+      this.setState({ result: result.data });
+    } catch (ex) {
+      const error = { ...this.state.error };
+      error.all = ex.response.data;
+      this.setState({ error });
+      console.log(ex.response.data);
+    }
+  };
+
   render() {
     return (
       <BgRegisration>
+        <Alert error={this.state.error.all} message={this.state.result} />
         <FormRegistration onSubmit={this.handleSubmit}>
           <Title>Sign up</Title>
           <form>
@@ -116,12 +130,13 @@ class Registration extends Component {
     );
   }
 }
-async function PostRegisration(account) {
-  try {
-    const result = await axios.post(API_END_POINT + "/api/users", account);
-    console.log(result.data);
-  } catch (ex) {
-    console.log(ex.response.data);
-  }
-}
+const Alert = props => {
+  if (props.error)
+    return <div className="alert alert-danger">{props.error}</div>;
+  if (props.message)
+    return <div className="alert alert-success">{props.message}</div>;
+
+  return <React.Fragment />;
+};
+
 export default Registration;
