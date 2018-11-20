@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import requst from "../../../services/requestServer.js";
 import { BgRegisration, FormRegistration } from "./style.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import {
@@ -54,7 +54,7 @@ class Registration extends Component {
       login: "",
       password: ""
     },
-    error: { all: "123" },
+    error: {},
     result: ""
   };
   handleChange = ({ currentTarget: input }) => {
@@ -82,13 +82,12 @@ class Registration extends Component {
   }
   PostRegisration = async account => {
     try {
-      const result = await axios.post(API_END_POINT + "/api/users", account);
+      const result = await requst.post(API_END_POINT + "/api/users", account);
       this.setState({ result: result.data });
     } catch (ex) {
       const error = { ...this.state.error };
       error.all = ex.response.data;
       this.setState({ error });
-      console.log(ex.response.data);
     }
   };
 

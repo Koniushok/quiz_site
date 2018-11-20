@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import requst from "../../../services/requestServer.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import { BgAuthorization, FormAuth } from "./style.js";
 import { Input } from "mdbreact";
@@ -28,11 +28,12 @@ class Authorization extends Component {
   };
   postAuthorization = async () => {
     try {
-      const result = await axios.post(
+      const result = await requst.post(
         API_END_POINT + "/api/auth",
         this.state.account
       );
-      console.log(result.data);
+      requst.setJwt(result.data.jwt);
+      console.log(result.data.user);
     } catch (ex) {
       this.setState({ error: ex.response.data });
     }

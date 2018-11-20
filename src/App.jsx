@@ -1,20 +1,27 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import Header from "./components/header/header.jsx";
 import Footer from "./components/footer/footer.jsx";
 import Main from "./components/main/main.jsx";
+import { dispatch } from "rxjs/internal/observable/pairs";
 
-const bgColor = "#24292e";
-const minH = "72px";
 class App extends Component {
   render() {
+    const { style } = this.props;
     return (
       <React.Fragment>
-        <Header bg={bgColor} minHeight={minH} />
+        <Header bg={style.bgColor} minHeight={style.minH} />
         <Main />
-        <Footer bg={bgColor} minHeight={minH} />
+        <Footer bg={style.bgColor} minHeight={style.minH} />
       </React.Fragment>
     );
   }
 }
 
-export default App;
+export default withRouter(
+  connect(
+    state => ({ style: state.style }),
+    dispatch => ({})
+  )(App)
+);

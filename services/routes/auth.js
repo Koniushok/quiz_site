@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
   if (!checkPassword) return res.status(400).send("Invalid login or password.");
 
   const token = user.GetAuthToken();
-  res.send(token);
+  res.send({ jwt: token, user: _.omit(user._doc, ["password"]) });
 });
 
 function validate(data) {
