@@ -5,10 +5,13 @@ import Header from "./components/header/header.jsx";
 import Footer from "./components/footer/footer.jsx";
 import Main from "./components/main/main.jsx";
 import { dispatch } from "rxjs/internal/observable/pairs";
+import { login } from "./services/auth.js";
+
+login();
 
 class App extends Component {
   render() {
-    const { style } = this.props;
+    const { style } = this.props.state;
     return (
       <React.Fragment>
         <Header bg={style.bgColor} minHeight={style.minH} />
@@ -21,7 +24,7 @@ class App extends Component {
 
 export default withRouter(
   connect(
-    state => ({ style: state.style }),
+    state => ({ state: state }),
     dispatch => ({})
   )(App)
 );

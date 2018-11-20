@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import requst from "../../../services/requestServer.js";
+import { dispatch } from "../../../store/index.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import { BgAuthorization, FormAuth } from "./style.js";
 import { Input } from "mdbreact";
@@ -33,7 +34,7 @@ class Authorization extends Component {
         this.state.account
       );
       requst.setJwt(result.data.jwt);
-      console.log(result.data.user);
+      dispatch("ADD_USER", result.data.user);
     } catch (ex) {
       this.setState({ error: ex.response.data });
     }

@@ -15,7 +15,6 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 
 //router
 import { BrowserRouter } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 //
 import * as serviceWorker from "./serviceWorker";
 

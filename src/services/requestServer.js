@@ -2,6 +2,9 @@ import axios from "axios";
 
 const tokenKey = "token";
 
+const token = localStorage.getItem(tokenKey);
+if (token) axios.defaults.headers.common["token"] = token;
+
 export function removeJwt() {
   localStorage.removeItem(tokenKey);
   axios.defaults.headers.common["token"] = undefined;

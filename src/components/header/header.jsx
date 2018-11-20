@@ -1,7 +1,17 @@
 import React, { Component } from "react";
 import HeaderNav from "./headerNav.jsx";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-const links = [
+const UserLinks = [
+  {
+    id: 0,
+    title: "Home",
+    url: "/"
+  }
+];
+
+const VisitorLinks = [
   {
     id: 0,
     title: "Home",
@@ -20,11 +30,11 @@ const links = [
 ];
 
 class Header extends Component {
-  state = {};
   render() {
+    const { user } = this.props.state;
     return (
       <HeaderNav
-        navLinks={links}
+        navLinks={user._id ? UserLinks : VisitorLinks}
         bg={this.props.bg}
         minHeight={this.props.minHeight}
       />
@@ -32,4 +42,9 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(
+  connect(
+    state => ({ state: state }),
+    dispatch => ({})
+  )(Header)
+);

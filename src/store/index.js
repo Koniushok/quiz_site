@@ -13,16 +13,23 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case "ADD_USER": {
       endState.user = action.payload;
-      return endState;
+      break;
     }
-    case "ADD_STYLE-COLOR": {
+    case "ADD_STYLE_COLOR": {
       endState.style.bgColor = action.payload;
-      return endState;
+
+      break;
     }
   }
+
+  console.log("changes Store:", endState);
   return endState;
 }
 
 const store = createStore(reducer);
+
+export function dispatch(type, payload) {
+  store.dispatch({ type, payload });
+}
 
 export default store;
