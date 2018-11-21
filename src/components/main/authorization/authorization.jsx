@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import requst from "../../../services/requestServer.js";
-import { dispatch } from "../../../store/index.js";
-import { API_END_POINT } from "../../../config/constants.js";
+import { authorization } from "../../../services/auth.js";
 import { BgAuthorization, FormAuth } from "./style.js";
 import { Input } from "mdbreact";
 import {
@@ -27,14 +25,10 @@ class Authorization extends Component {
     this.postAuthorization();
     console.log("Authorization hendle", this.state.account);
   };
-  postAuthorization = async () => {
+  postAuthorization = () => {
     try {
-      const result = await requst.post(
-        API_END_POINT + "/api/auth",
-        this.state.account
-      );
-      requst.setJwt(result.data.jwt);
-      dispatch("ADD_USER", result.data.user);
+      authorization(this.state.account.login, this.state.account.password);
+      this.props.history.push("/");
     } catch (ex) {
       this.setState({ error: ex.response.data });
     }

@@ -8,6 +8,16 @@ const UserLinks = [
     id: 0,
     title: "Home",
     url: "/"
+  },
+  {
+    id: 1,
+    title: "Logout",
+    url: "/logout"
+  },
+  {
+    id: 2,
+    title: "Profile",
+    url: "/profile"
   }
 ];
 

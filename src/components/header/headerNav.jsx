@@ -4,7 +4,7 @@ import { NavItem, HeaderDiv } from "./styles/styled.js";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 //router
 import { Link } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import { Logo } from "./headerNavItems.jsx";
 

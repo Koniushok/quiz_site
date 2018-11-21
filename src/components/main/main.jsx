@@ -3,6 +3,8 @@ import { Switch, Route, Redirect, Router } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 //content pages
+import profile from "./profile/profile.jsx";
+import logout from "./logout/logout.js";
 import Home from "./home/home.jsx";
 import Registration from "./registration/registration.jsx";
 import Authorization from "./authorization/authorization.jsx";
@@ -22,8 +24,9 @@ const userRouter = props => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/not-found" component={Not_fount} />
-      <Redirect to="/not-found" />
+      <Route path="/logout" component={logout} />
+      <Route path="/profile" component={profile} />
+      <Route component={Not_fount} />
     </Switch>
   );
 };
@@ -34,8 +37,7 @@ const visitorRouter = props => {
       <Route exact path="/" component={Home} />
       <Route path="/registration" component={Registration} />
       <Route path="/authorization" component={Authorization} />
-      <Route path="/not-found" component={Not_fount} />
-      <Redirect to="/not-found" />
+      <Route component={Not_fount} />
     </Switch>
   );
 };

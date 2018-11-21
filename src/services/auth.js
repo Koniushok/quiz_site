@@ -18,3 +18,13 @@ export async function login() {
     console.error(ex);
   }
 }
+
+export async function authorization(login, password) {
+  const { data } = await request.post(API_END_POINT + "/api/auth", {
+    login: login,
+    password: password
+  });
+  request.setJwt(data.jwt);
+  dispatch("ADD_USER", data.user);
+  console.log("authorization:", data.user);
+}

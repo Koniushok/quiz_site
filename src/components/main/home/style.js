@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import fonImg from "../../../assets/images/fon.jpg";
 
 export const BgHome = styled.div`

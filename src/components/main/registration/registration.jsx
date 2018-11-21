@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import requst from "../../../services/requestServer.js";
+import request from "../../../services/requestServer.js";
 import { BgRegisration, FormRegistration } from "./style.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import {
@@ -82,7 +82,7 @@ class Registration extends Component {
   }
   PostRegisration = async account => {
     try {
-      const result = await requst.post(API_END_POINT + "/api/users", account);
+      const result = await request.post(API_END_POINT + "/api/users", account);
       this.setState({ result: result.data });
     } catch (ex) {
       const error = { ...this.state.error };
