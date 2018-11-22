@@ -25,9 +25,12 @@ class Authorization extends Component {
     this.postAuthorization();
     console.log("Authorization hendle", this.state.account);
   };
-  postAuthorization = () => {
+  postAuthorization = async () => {
     try {
-      authorization(this.state.account.login, this.state.account.password);
+      await authorization(
+        this.state.account.login,
+        this.state.account.password
+      );
       this.props.history.push("/");
     } catch (ex) {
       this.setState({ error: ex.response.data });

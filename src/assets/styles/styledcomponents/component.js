@@ -11,6 +11,7 @@ const StButton = css`
   border: solid 2px #fff;
   padding: 10px 40px;
   margin: ${props => props.margin};
+  width: ${props => props.width};
 
   &:hover {
     border: solid 2px #d7ad1b;
@@ -41,6 +42,9 @@ export const BtLink = styled.a`
 export const BtBlock = styled.div`
   ${StButton};
   display: inline-block;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Title = styled.p`

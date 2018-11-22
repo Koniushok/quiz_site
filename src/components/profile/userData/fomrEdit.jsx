@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import request from "../../../services/requestServer.js";
-import { BgRegisration, FormRegistration } from "./style.js";
+
+import { dispatch } from "../../../store/index.js";
 import { API_END_POINT } from "../../../config/constants.js";
-import {
-  Button,
-  Title
-} from "../../../assets/styles/styledcomponents/component.js";
+import { Button } from "../../../assets/styles/styledcomponents/component.js";
 
 const formItems = [
   {
@@ -35,25 +33,12 @@ const formItems = [
     id: "defaultFormRegisterEmailmEx",
     className: "form-control",
     label: "Your Email"
-  },
-  {
-    name: "password",
-    type: "password",
-    id: "defaultFormRegisterPasswordEx",
-    className: "form-control",
-    label: "Your Password"
   }
 ];
 
-class Registration extends Component {
+class Edit extends Component {
   state = {
-    account: {
-      name: "",
-      surname: "",
-      email: "",
-      login: "",
-      password: ""
-    },
+    account: this.props.account,
     error: {},
     result: ""
   };
@@ -64,8 +49,9 @@ class Registration extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (this.validate()) this.PostRegisration(this.state.account);
-    else console.error("Registration hendle");
+    this.setState({ result: "" });
+    if (this.validate()) this.PostEditing(this.state.account);
+    else console.error("Editing hendle");
   };
   validate() {
     let test = true;
@@ -80,10 +66,15 @@ class Registration extends Component {
     this.setState({ error });
     return test;
   }
-  PostRegisration = async account => {
+  PostEditing = async account => {
     try {
-      const result = await request.post(API_END_POINT + "/api/users", account);
-      this.setState({ result: result.data });
+      const result = await request.post(
+        API_END_POINT + "/api/users/edit",
+        account
+      );
+      this.setState({ result: "Successfully changed" });
+      dispatch("ADD_USER", result.data);
+      //this.setState({ result: result.data });
     } catch (ex) {
       const error = { ...this.state.error };
       error.all = ex.response.data;
@@ -93,10 +84,9 @@ class Registration extends Component {
 
   render() {
     return (
-      <BgRegisration>
+      <React.Fragment>
         <Alert error={this.state.error.all} message={this.state.result} />
-        <FormRegistration onSubmit={this.handleSubmit}>
-          <Title>Sign up</Title>
+        <form onSubmit={this.handleSubmit}>
           {formItems.map(item => (
             <React.Fragment key={item.id}>
               <label htmlFor={item.id} className="grey-text">
@@ -117,13 +107,11 @@ class Registration extends Component {
               )}
             </React.Fragment>
           ))}
-          <div className="text-center mt-4">
-            <Button light type="submit">
-              Register
-            </Button>
-          </div>
-        </FormRegistration>
-      </BgRegisration>
+          <Button width="150px" margin="10px 0 20px 0" light>
+            Save
+          </Button>
+        </form>
+      </React.Fragment>
     );
   }
 }
@@ -136,4 +124,4 @@ const Alert = props => {
   return null;
 };
 
-export default Registration;
+export default Edit;

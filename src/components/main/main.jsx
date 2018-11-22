@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect, Router } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 //content pages
-import profile from "./profile/profile.jsx";
-import logout from "./logout/logout.js";
+import profile from "../profile/profile.jsx";
+import logout from "../logout/logout.js";
 import Home from "./home/home.jsx";
 import Registration from "./registration/registration.jsx";
 import Authorization from "./authorization/authorization.jsx";

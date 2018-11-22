@@ -32,7 +32,7 @@ class HeaderNav extends React.Component {
                 this.props.navLinks.map(link => (
                   <Route
                     key={link.id}
-                    exact
+                    exact={link.exact}
                     path={link.url}
                     children={props =>
                       props.match ? (

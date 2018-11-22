@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import Sidebar from "./Components/sidebar.jsx";
+import Sidebar from "./sidebar/sidebar.jsx";
+import { Switch, Route } from "react-router-dom";
 import { BgProfile } from "./style.js";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+//page
+import UserData from "./userData/userData.jsx";
+import UserTest from "./userTest/userTest.jsx";
 
 const urlProfile = "/profile";
 const MenuLinks = [
@@ -12,12 +16,12 @@ const MenuLinks = [
     url: urlProfile + "/data"
   },
   {
-    id: 2,
-    title: "MyTask",
-    url: urlProfile + "/task"
+    id: 1,
+    title: "MyTest",
+    url: urlProfile + "/mytest"
   },
   {
-    id: 3,
+    id: 2,
     title: "MyFriends",
     url: urlProfile + "/friends"
   }
@@ -29,6 +33,10 @@ class Profile extends Component {
     return (
       <BgProfile>
         <Sidebar MenuLinks={MenuLinks} />
+        <Switch>
+          <Route path={urlProfile + "/data"} component={UserData} />
+          <Route path={urlProfile + "/mytest"} component={UserTest} />
+        </Switch>
       </BgProfile>
     );
   }

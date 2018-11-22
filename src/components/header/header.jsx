@@ -7,17 +7,19 @@ const UserLinks = [
   {
     id: 0,
     title: "Home",
+    exact: true,
     url: "/"
   },
   {
     id: 1,
-    title: "Logout",
-    url: "/logout"
+    title: "Profile",
+    url: "/profile"
   },
   {
     id: 2,
-    title: "Profile",
-    url: "/profile"
+
+    title: "Logout",
+    url: "/logout"
   }
 ];
 
@@ -25,6 +27,7 @@ const VisitorLinks = [
   {
     id: 0,
     title: "Home",
+    exact: true,
     url: "/"
   },
   {
