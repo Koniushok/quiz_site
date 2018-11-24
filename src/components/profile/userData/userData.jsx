@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BgUserData, Title, TextInf, TitelInf } from "./style";
-import FomrEdit from "./fomrEdit.jsx";
+import FomrEdit from "../form/formEdit.jsx";
 import { Button } from "../../../assets/styles/styledcomponents/component.js";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";

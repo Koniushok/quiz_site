@@ -12,6 +12,7 @@ const StButton = css`
   padding: 10px 40px;
   margin: ${props => props.margin};
   width: ${props => props.width};
+  height: ${props => props.height};
 
   &:hover {
     border: solid 2px #d7ad1b;

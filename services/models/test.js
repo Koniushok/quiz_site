@@ -4,7 +4,11 @@ const { taskSchema } = require("./task");
 
 const testSchema = new mongoose.Schema({
   tasks: [taskSchema],
-  name: String
+  name: String,
+  public: {
+    type: Boolean,
+    default: false
+  }
 });
 
 function validateTest(user) {

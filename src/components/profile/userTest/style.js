@@ -31,3 +31,10 @@ export const TableItem = styled.tr`
     cursor: pointer;
   }
 `;
+
+export const TableControl = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const TableForm = styled.form``;

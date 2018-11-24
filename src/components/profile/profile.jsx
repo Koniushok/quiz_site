@@ -22,8 +22,8 @@ const MenuLinks = [
   },
   {
     id: 2,
-    title: "MyFriends",
-    url: urlProfile + "/friends"
+    title: "MyStatistics",
+    url: urlProfile + "/statistics"
   }
 ];
 

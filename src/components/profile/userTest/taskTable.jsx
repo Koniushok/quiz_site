@@ -7,19 +7,15 @@ import { withRouter } from "react-router-dom";
 import request from "../../../services/requestServer.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import { dispatch } from "../../../store/index.js";
-import TestTable from "./testTable";
 
 class UserTest extends Component {
   state = {
+    testName: "",
     testsActive: null,
     taskActive: null
   };
 
   СhoiceTest = test => {
-    if (!test) {
-      this.setState({ testsActive: null });
-      return;
-    }
     const choicetest = this.state.testsActive;
 
     if (choicetest && choicetest._id === test._id) {
@@ -31,10 +27,6 @@ class UserTest extends Component {
   };
 
   СhoiceTask = task => {
-    if (!task) {
-      this.setState({ taskActive: null });
-      return;
-    }
     const choicetask = this.state.taskActive;
 
     if (choicetask && choicetask._id === task._id) {
@@ -44,15 +36,55 @@ class UserTest extends Component {
     }
   };
 
+  handleChange = ({ currentTarget: input }) => {
+    if (input.name === "testName") this.setState({ testName: input.value });
+  };
+
+  handleTestAdd = e => {
+    e.preventDefault();
+    try {
+      const result = await request.post(
+        API_END_POINT + "/api/users/edit",
+        this.state.testName
+      );
+      dispatch("ADD_TEST", this.state.testName);
+    } catch (ex) {
+      console.error(ex);
+    }
+  };
   render() {
     const { user } = this.props.state;
 
     return (
       <BgUserTest>
-        <TestTable
-          testsActive={this.state.testsActive}
-          СhoiceTest={this.СhoiceTest}
-        />
+        <BgTable>
+          <h2>List your Test:</h2>
+          <TableTest
+            user={user}
+            testsActive={this.state.testsActive}
+            СhoiceTest={this.СhoiceTest}
+          />
+          <div>
+            <form onSubmit={this.handleTestAdd}>
+              <label htmlFor="Idname" className="grey-text">
+                NameTest
+              </label>
+              <input
+                name="testName"
+                type="text"
+                required
+                id="Idname"
+                className="form-control"
+                onChange={this.handleChange}
+                value={this.state.testName}
+              />
+            </form>
+            <Button margin="0 10px 0 0" light>
+              Add
+            </Button>
+            <Button light>Remove</Button>
+          </div>
+        </BgTable>
         {this.state.testsActive && (
           <BgTable>
             <h2>{this.state.testsActive.name + "(List tasks):"}</h2>
@@ -73,6 +105,36 @@ class UserTest extends Component {
     );
   }
 }
+
+const TableTest = props => {
+  const { user, testsActive, СhoiceTest } = props;
+  return (
+    <Table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name Test</th>
+          <th>Task</th>
+          <th>Public</th>
+        </tr>
+      </thead>
+      <tbody>
+        {user.tests.map((test, index) => (
+          <TableItem
+            active={testsActive && testsActive._id === test._id}
+            key={test._id}
+            onClick={() => СhoiceTest(test)}
+          >
+            <td scope="row">{index + 1}</td>
+            <td>{test.name}</td>
+            <td>{test.tasks.length}</td>
+            <td>false</td>
+          </TableItem>
+        ))}
+      </tbody>
+    </Table>
+  );
+};
 
 const TableTask = props => {
   const { tasks, taskActive, Сhoicetask } = props;
