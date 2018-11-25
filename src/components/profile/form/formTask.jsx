@@ -7,38 +7,52 @@ import { Button } from "../../../assets/styles/styledcomponents/component.js";
 
 const formItems = [
   {
-    name: "login",
+    name: "answer1",
     type: "text",
-    id: "defaultFormRegisterLoginEx",
+    id: "defaultFormRegisterAnswer1Ex",
     className: "form-control",
-    label: "Your Login"
+    label: "1 Answer"
   },
   {
-    name: "name",
+    name: "answer2",
     type: "text",
-    id: "defaultFormRegisterNameEx",
+    id: "defaultFormRegisterAnswer2Ex",
     className: "form-control",
-    label: "Your Name"
+    label: "2 Answer"
   },
   {
-    name: "surname",
+    name: "answer3",
     type: "text",
-    id: "defaultFormRegisterSurnameEx",
+    id: "defaultFormRegisterAnswer3Ex",
     className: "form-control",
-    label: "Your Surname"
+    label: "3 Answer"
   },
   {
-    name: "email",
-    type: "email",
-    id: "defaultFormRegisterEmailmEx",
+    name: "answer4",
+    type: "text",
+    id: "defaultFormRegisterAnswer4Ex",
     className: "form-control",
-    label: "Your Email"
+    label: "4 Answer"
+  },
+  {
+    name: "answer1",
+    type: "number",
+    id: "defaultFormRegisterCorAnswerEx",
+    className: "form-control",
+    label: "CorrectAnswer"
   }
 ];
 
-class Edit extends Component {
+class FomrTask extends Component {
   state = {
-    account: this.props.account,
+    Task: {
+      question,
+      answer1,
+      answer2,
+      answer3,
+      answer4,
+      correctAnswer
+    },
     error: {},
     result: ""
   };
@@ -124,4 +138,4 @@ const Alert = props => {
   return null;
 };
 
-export default Edit;
+export default FomrTask;

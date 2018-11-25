@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BgUserData, Title, TextInf, TitelInf } from "./style";
-import FomrEdit from "../form/formEdit.jsx";
+import FomrUser from "../form/formUser.jsx";
 import { Button } from "../../../assets/styles/styledcomponents/component.js";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -27,7 +27,7 @@ class UserData extends Component {
       <BgUserData>
         <Title>Profile data</Title>
         {this.state.editing ? (
-          <FomrEdit account={account} />
+          <FomrUser account={account} />
         ) : (
           <React.Fragment>
             <LabelInf title="Email" value={user.email} />
