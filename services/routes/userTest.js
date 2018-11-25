@@ -1,5 +1,3 @@
-const bcrypt = require("bcrypt");
-const _ = require("lodash");
 const auth = require("../middleware/auth");
 const { User } = require("../models/user");
 const { Test } = require("../models/test");
@@ -39,16 +37,71 @@ router.delete("/:id", auth, async (req, res) => {
   const user = await User.findById(req.user._id);
   tests = [...user.tests];
 
-  var test = tests.filter(function(t) {
-    return t._id === req.user._id;
+  var index = -1;
+  tests.map((t, i) => {
+    if (t._id == req.params.id) {
+      index = i;
+    }
   });
-
-  user.tests.splice(tests.indexOf(test), 1);
+  if (index === -1)
+    return res.status(404).send("The test with the given ID was not found.");
+  user.tests.splice(index, 1);
 
   user.save();
-  if (!test)
+
+  res.send(user.tests);
+});
+
+router.delete("/task/:idTest/:idTask", auth, async (req, res) => {
+  const user = await User.findById(req.user._id);
+  tests = [...user.tests];
+
+  var indexTest = -1;
+  tests.map((t, i) => {
+    console.log(t._id, "==", req.params.idTest);
+    if (t._id == req.params.idTest) {
+      indexTest = i;
+    }
+  });
+  console.log("indexTest", indexTest);
+  if (indexTest === -1)
     return res.status(404).send("The test with the given ID was not found.");
 
+  var indexTask = -1;
+  tests[indexTest].tasks.map((t, i) => {
+    console.log(req.params.idTask, "==", t._id);
+    if (t._id == req.params.idTask) {
+      indexTask = i;
+    }
+  });
+  if (indexTask === -1)
+    return res.status(404).send("The task with the given ID was not found.");
+
+  console.log(indexTest, "-", indexTask);
+  user.tests[indexTest].tasks.splice(indexTask, 1);
+
+  user.save();
+
+  res.send(user.tests);
+});
+
+router.post("/task", auth, async (req, res) => {
+  const user = await User.findById(req.user._id);
+  console.log(req.body.task);
+
+  var index = -1;
+  user.tests.map((t, i) => {
+    if (t._id == req.body.testId) {
+      index = i;
+    }
+  });
+
+  user.tests[index].tasks = [
+    ...user.tests[index].tasks,
+    new Task(req.body.task)
+  ];
+
+  user.save();
   res.send(user.tests);
 });
 

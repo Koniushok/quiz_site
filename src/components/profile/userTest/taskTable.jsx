@@ -4,10 +4,37 @@ import { Button } from "../../../assets/styles/styledcomponents/component.js";
 import { Table } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import FormTask from "../form/formTask";
+import request from "../../../services/requestServer.js";
+import { API_END_POINT } from "../../../config/constants.js";
+import { dispatch } from "../../../store/index.js";
 
 class UserTest extends Component {
   state = {
-    taskName: {}
+    taskName: {},
+    formAdd: false
+  };
+
+  onForm = () => {
+    const formAdd = !this.state.formAdd;
+    this.setState({ formAdd: formAdd });
+  };
+
+  handleDelete = async () => {
+    try {
+      const result = await request.delete(
+        API_END_POINT +
+          "/api/userTest/task/" +
+          this.props.testsActive._id +
+          "/" +
+          this.props.taskActive._id
+      );
+      this.props.СhoiceTask(null);
+      console.log(result.data);
+      dispatch("UPDATA_TEST", result.data);
+    } catch (ex) {
+      console.error(ex);
+    }
   };
 
   render() {
@@ -15,18 +42,36 @@ class UserTest extends Component {
 
     return (
       <BgTable>
-        <h2>{this.props.testsActive.name + "(List tasks):"}</h2>
-        <TableTask
-          tasks={this.props.testsActive.tasks}
-          taskActive={this.props.taskActive}
-          Сhoicetask={this.props.СhoiceTask}
-        />
-        <TableControl>
-          {this.props.taskActive && <Button light>Remove</Button>}
-          <Button margin="0 10px 0 0" light>
-            Add
-          </Button>
-        </TableControl>
+        {this.state.formAdd ? (
+          <React.Fragment>
+            <FormTask test={this.props.testsActive} />
+            <Button margin="0 10px 0 0" light onClick={this.onForm}>
+              cancel
+            </Button>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <h2>{this.props.testsActive.name + "(List tasks):"}</h2>
+            <TableTask
+              tasks={
+                user.tests[GetIndexTest(user.tests, this.props.testsActive._id)]
+                  .tasks
+              }
+              taskActive={this.props.taskActive}
+              Сhoicetask={this.props.СhoiceTask}
+            />
+            <TableControl>
+              <Button margin="0 10px 0 0" light onClick={this.onForm}>
+                Add
+              </Button>
+              {this.props.taskActive && (
+                <Button light onClick={this.handleDelete}>
+                  Remove
+                </Button>
+              )}
+            </TableControl>
+          </React.Fragment>
+        )}
       </BgTable>
     );
   }
@@ -67,6 +112,16 @@ const TableTask = props => {
       </tbody>
     </Table>
   );
+};
+
+const GetIndexTest = (tests, id) => {
+  let index = -1;
+  tests.map((t, i) => {
+    if (t._id == id) {
+      index = i;
+    }
+  });
+  return index;
 };
 
 export default withRouter(

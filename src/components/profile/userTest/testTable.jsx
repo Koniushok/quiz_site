@@ -33,7 +33,7 @@ class TestTable extends Component {
   handleDelete = async () => {
     try {
       const result = await request.delete(
-        API_END_POINT + "/api/userTest/:" + this.props.testsActive._id
+        API_END_POINT + "/api/userTest/" + this.props.testsActive._id
       );
       this.props.СhoiceTest(null);
       console.log(result.data);
