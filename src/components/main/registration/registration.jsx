@@ -84,6 +84,15 @@ class Registration extends Component {
     try {
       const result = await request.post(API_END_POINT + "/api/users", account);
       this.setState({ result: result.data });
+      this.setState({
+        account: {
+          name: "",
+          surname: "",
+          email: "",
+          login: "",
+          password: ""
+        }
+      });
     } catch (ex) {
       const error = { ...this.state.error };
       error.all = ex.response.data;

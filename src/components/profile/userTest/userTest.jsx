@@ -34,7 +34,6 @@ class UserTest extends Component {
     } else {
       this.setState({ testsActive: test });
     }
-    console.log(test);
   };
 
   СhoiceTask = task => {

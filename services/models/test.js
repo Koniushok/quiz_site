@@ -7,7 +7,7 @@ const testSchema = new mongoose.Schema({
   name: String,
   public: {
     type: Boolean,
-    default: false
+    default: true
   }
 });
 

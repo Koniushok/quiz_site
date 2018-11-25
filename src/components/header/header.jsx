@@ -17,7 +17,11 @@ const UserLinks = [
   },
   {
     id: 2,
-
+    title: "Tests",
+    url: "/tests"
+  },
+  {
+    id: 3,
     title: "Logout",
     url: "/logout"
   }

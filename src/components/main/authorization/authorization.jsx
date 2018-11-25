@@ -34,6 +34,7 @@ class Authorization extends Component {
       this.props.history.push("/");
     } catch (ex) {
       this.setState({ error: ex.response.data });
+      this.setState({ account: { password: "" } });
     }
   };
   render() {

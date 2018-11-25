@@ -8,7 +8,7 @@ export const BgRegisration = styled.div`
   padding-bottom: 40px;
 `;
 
-export const FormRegistration = styled.div`
+export const FormRegistration = styled.form`
   width: 400px;
   margin: auto;
 `;
