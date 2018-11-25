@@ -11,13 +11,7 @@ import { dispatch } from "../../../store/index.js";
 
 class UserTest extends Component {
   state = {
-    taskName: {},
-    formAdd: false
-  };
-
-  onForm = () => {
-    const formAdd = !this.state.formAdd;
-    this.setState({ formAdd: formAdd });
+    taskName: {}
   };
 
   handleDelete = async () => {
@@ -39,13 +33,16 @@ class UserTest extends Component {
 
   render() {
     const { user } = this.props.state;
-
     return (
       <BgTable>
-        {this.state.formAdd ? (
+        {this.props.formActive ? (
           <React.Fragment>
-            <FormTask test={this.props.testsActive} />
-            <Button margin="0 10px 0 0" light onClick={this.onForm}>
+            <FormTask
+              test={this.props.testsActive}
+              edit={this.props.edit}
+              task={this.props.edit ? this.props.taskActive : null}
+            />
+            <Button margin="0 10px 0 0" light onClick={this.props.onForm}>
               cancel
             </Button>
           </React.Fragment>
@@ -61,13 +58,18 @@ class UserTest extends Component {
               Сhoicetask={this.props.СhoiceTask}
             />
             <TableControl>
-              <Button margin="0 10px 0 0" light onClick={this.onForm}>
+              <Button margin="0 10px 0 0" light onClick={this.props.onForm}>
                 Add
               </Button>
               {this.props.taskActive && (
-                <Button light onClick={this.handleDelete}>
-                  Remove
-                </Button>
+                <React.Fragment>
+                  <Button light onClick={this.props.onFormEdit}>
+                    Editing
+                  </Button>
+                  <Button light onClick={this.handleDelete}>
+                    Remove
+                  </Button>
+                </React.Fragment>
               )}
             </TableControl>
           </React.Fragment>

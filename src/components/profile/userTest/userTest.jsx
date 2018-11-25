@@ -8,10 +8,21 @@ import TaskTable from "./taskTable";
 class UserTest extends Component {
   state = {
     testsActive: null,
-    taskActive: null
+    taskActive: null,
+    taskFormActive: false,
+    taskEdit: false
+  };
+
+  onTaskForm = () => {
+    const active = !this.state.taskFormActive;
+    this.setState({ taskFormActive: active, taskEdit: false });
+  };
+  onTaskFormEdit = () => {
+    this.setState({ taskFormActive: true, taskEdit: true });
   };
 
   СhoiceTest = test => {
+    this.setState({ taskFormActive: false, taskEdit: false });
     if (!test) {
       this.setState({ testsActive: null });
       return;
@@ -51,6 +62,10 @@ class UserTest extends Component {
         />
         {this.state.testsActive && (
           <TaskTable
+            onForm={this.onTaskForm}
+            onFormEdit={this.onTaskFormEdit}
+            formActive={this.state.taskFormActive}
+            edit={this.state.taskEdit}
             testsActive={this.state.testsActive}
             taskActive={this.state.taskActive}
             СhoiceTask={this.СhoiceTask}

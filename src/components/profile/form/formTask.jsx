@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import request from "../../../services/requestServer.js";
 import Joi from "joi-browser";
 
+import _ from "lodash";
 import { dispatch } from "../../../store/index.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import { Button } from "../../../assets/styles/styledcomponents/component.js";
@@ -55,14 +56,17 @@ const formItems = [
 
 class FormTask extends Form {
   state = {
-    data: {
-      question: "",
-      answer1: "",
-      answer2: "",
-      answer3: "",
-      answer4: "",
-      correctAnswer: 1
-    },
+    data:
+      this.props.task != null
+        ? this.props.task
+        : {
+            question: "",
+            answer1: "",
+            answer2: "",
+            answer3: "",
+            answer4: "",
+            correctAnswer: 1
+          },
     errors: {},
     result: ""
   };
@@ -81,10 +85,19 @@ class FormTask extends Form {
 
   doSubmit = async () => {
     try {
-      const result = await request.post(API_END_POINT + "/api/userTest/task", {
-        task: this.state.data,
-        testId: this.props.test._id
-      });
+      let result;
+      if (!this.props.edit) {
+        result = await request.post(API_END_POINT + "/api/userTest/task", {
+          task: this.state.data,
+          testId: this.props.test._id
+        });
+      } else {
+        result = await request.post(API_END_POINT + "/api/userTest/task/edit", {
+          task: this.state.data,
+          testId: this.props.test._id
+        });
+        console.log(result.data);
+      }
       console.log(result.data);
       this.setState({ result: "Successfully changed" });
       dispatch("UPDATA_TEST", result.data);
@@ -107,7 +120,7 @@ class FormTask extends Form {
             </React.Fragment>
           ))}
           <Button width="150px" margin="10px 0 20px 0" light>
-            ADD
+            {this.props.edit ? "Editing" : "Add"}
           </Button>
         </form>
       </React.Fragment>

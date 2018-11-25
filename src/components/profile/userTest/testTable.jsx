@@ -10,26 +10,41 @@ import { dispatch } from "../../../store/index.js";
 
 class TestTable extends Component {
   state = {
-    testName: ""
+    testName: "",
+    testNameEdit: ""
   };
 
   handleChange = ({ currentTarget: input }) => {
     if (input.name === "testName") this.setState({ testName: input.value });
+    if (input.name === "testNameEdit")
+      this.setState({ testNameEdit: input.value });
   };
 
   handleTestAdd = async e => {
     e.preventDefault();
-    console.log("handleTestAdd", this.state.testName);
     try {
       const result = await request.post(API_END_POINT + "/api/userTest", {
         name: this.state.testName
       });
+      this.setState({ testName: "" });
       dispatch("UPDATA_TEST", result.data);
     } catch (ex) {
       console.error(ex);
     }
   };
-
+  handleTestEdit = async e => {
+    e.preventDefault();
+    try {
+      const result = await request.post(API_END_POINT + "/api/userTest/edit", {
+        name: this.state.testNameEdit,
+        id: this.props.testsActive._id
+      });
+      dispatch("UPDATA_TEST", result.data);
+      this.setState({ testNameEdit: "" });
+    } catch (ex) {
+      console.error(ex);
+    }
+  };
   handleDelete = async () => {
     try {
       const result = await request.delete(
@@ -42,6 +57,7 @@ class TestTable extends Component {
       console.error(ex);
     }
   };
+
   render() {
     const { user } = this.props.state;
 
@@ -53,34 +69,30 @@ class TestTable extends Component {
           testsActive={this.props.testsActive}
           СhoiceTest={this.props.СhoiceTest}
         />
+
         <TableControl>
-          <TableForm onSubmit={this.handleTestAdd}>
-            <label htmlFor="Idname" className="grey-text">
-              NameTest
-            </label>
-            <input
-              name="testName"
-              type="text"
-              required
-              id="Idname"
-              className="form-control"
-              onChange={this.handleChange}
-              value={this.state.testName}
-            />
-            <Button margin="10px 10px 0 0" width="150px" height="50px" light>
-              Add
-            </Button>
-          </TableForm>
+          <FormAdd
+            handleTestAdd={this.handleTestAdd}
+            handleChange={this.handleChange}
+            testName={this.state.testName}
+          />
           {this.props.testsActive && (
-            <Button
-              width="150px"
-              height="50px"
-              margin="auto 0"
-              light
-              onClick={this.handleDelete}
-            >
-              Remove
-            </Button>
+            <React.Fragment>
+              <FormEdit
+                handleTestEdit={this.handleTestEdit}
+                handleChange={this.handleChange}
+                testNameEdit={this.state.testNameEdit}
+              />
+              <Button
+                width="150px"
+                height="50px"
+                margin="auto 0"
+                light
+                onClick={this.handleDelete}
+              >
+                Remove
+              </Button>
+            </React.Fragment>
           )}
         </TableControl>
       </BgTable>
@@ -110,11 +122,56 @@ const TableList = props => {
             <td scope="row">{index + 1}</td>
             <td>{test.name}</td>
             <td>{test.tasks.length}</td>
-            <td>false</td>
+            <td>{test.public + ""}</td>
           </TableItem>
         ))}
       </tbody>
     </Table>
+  );
+};
+const FormAdd = props => {
+  return (
+    <TableForm onSubmit={props.handleTestAdd}>
+      <label htmlFor="Idname" className="grey-text">
+        NameTest
+      </label>
+      <input
+        name="testName"
+        type="text"
+        required
+        id="Idname"
+        className="form-control"
+        onChange={props.handleChange}
+        value={props.testName}
+      />
+
+      <Button margin="10px 10px 0 0" width="150px" height="50px" light>
+        Add
+      </Button>
+    </TableForm>
+  );
+};
+const FormEdit = props => {
+  return (
+    <TableForm onSubmit={props.handleTestEdit}>
+      <label htmlFor="Idname" className="grey-text">
+        New name test
+      </label>
+      <input
+        name="testNameEdit"
+        type="text"
+        required
+        id="Idname"
+        required
+        className="form-control"
+        onChange={props.handleChange}
+        value={props.testNameEdit}
+      />
+
+      <Button margin="10px 10px 0 0" width="150px" height="50px" light>
+        editing
+      </Button>
+    </TableForm>
   );
 };
 

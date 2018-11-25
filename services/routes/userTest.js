@@ -2,6 +2,7 @@ const auth = require("../middleware/auth");
 const { User } = require("../models/user");
 const { Test } = require("../models/test");
 const { Task } = require("../models/task");
+const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
 
@@ -26,9 +27,28 @@ router.post("/new", auth, async (req, res) => {
 router.post("/", auth, async (req, res) => {
   const user = await User.findById(req.user._id);
 
-  console.log(req.body);
   user.tests = [...user.tests, new Test({ tasks: [], name: req.body.name })];
 
+  user.save();
+  res.send(user.tests);
+});
+
+router.post("/edit", auth, async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  tests = [...user.tests];
+
+  var index = -1;
+  tests.map((t, i) => {
+    if (t._id == req.body.id) {
+      index = i;
+    }
+  });
+  if (index === -1) {
+    return res.status(404).send("The test with the given ID was not found.");
+  }
+
+  user.tests[index].name = req.body.name;
   user.save();
   res.send(user.tests);
 });
@@ -105,4 +125,21 @@ router.post("/task", auth, async (req, res) => {
   res.send(user.tests);
 });
 
+router.post("/task/edit", auth, async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  tests = [...user.tests];
+
+  var indexTest = _.findIndex(tests, function(t) {
+    return t._id == req.body.testId;
+  });
+
+  var indexTask = _.findIndex(tests[indexTest].tasks, function(t) {
+    return t._id == req.body.task._id;
+  });
+
+  user.tests[indexTest].tasks[indexTask] = req.body.task;
+  user.save();
+  res.send(user.tests);
+});
 module.exports = router;
