@@ -5,14 +5,24 @@ import { connect } from "react-redux";
 import { Table } from "reactstrap";
 import { withRouter } from "react-router-dom";
 
+import PassTest from "../passTest/passTest.jsx";
+
 import request from "../../services/requestServer.js";
 import { API_END_POINT } from "../../config/constants.js";
 import { dispatch } from "../../store/index.js";
 
 class Tests extends Component {
   state = {
-    testsActive: null
+    testsActive: null,
+    result: null,
+    correctNumber: 0,
+    pass: false
   };
+
+  resultTest = (result, correctNumber) => {
+    this.setState({ result: result, correctNumber: correctNumber });
+  };
+
   componentDidMount() {
     this.getPublicTests();
   }
@@ -31,28 +41,47 @@ class Tests extends Component {
 
   СhoiceTest = test => {
     const choicetest = this.state.testsActive;
-
     if (choicetest && choicetest._id === test._id) {
       this.setState({ testsActive: null });
     } else {
       this.setState({ testsActive: test });
     }
   };
-
+  onPass = () => {
+    this.setState({ result: null, correctNumber: 0 });
+    const p = this.state.pass;
+    this.setState({ pass: !p });
+  };
   render() {
     const { publicTests } = this.props.state;
     return (
       <BgTests>
-        <h1>List public tests</h1>
-        <TableList
-          testsActive={this.state.testsActive}
-          СhoiceTest={this.СhoiceTest}
-          tests={publicTests}
-        />
-        {this.state.testsActive && (
-          <Button width="300px" margin="0 auto" light>
-            Pass the test
-          </Button>
+        {this.state.pass ? (
+          <React.Fragment>
+            <PassTest
+              test={this.state.testsActive}
+              result={this.state.result}
+              correctNumber={this.state.correctNumber}
+              resultTest={this.resultTest}
+            />
+            <Button width="300px" margin="0 auto" light onClick={this.onPass}>
+              cancel
+            </Button>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <h1>List public tests</h1>
+            <TableList
+              testsActive={this.state.testsActive}
+              СhoiceTest={this.СhoiceTest}
+              tests={publicTests}
+            />
+            {this.state.testsActive && (
+              <Button width="300px" margin="0 auto" light onClick={this.onPass}>
+                Pass the test
+              </Button>
+            )}
+          </React.Fragment>
         )}
       </BgTests>
     );
