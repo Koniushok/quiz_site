@@ -5,7 +5,7 @@ import { Button } from "../../assets/styles/styledcomponents/component.js";
 class PassTest extends Component {
   handleSubmit = event => {
     event.preventDefault();
-    const num = 0;
+    let num = 0;
     const resultTest = this.props.test.tasks.map((task, index) => {
       //console.log("Q" + index + "==", event.target["question" + index].value);
       const res = event.target["question" + index].value == task.correctAnswer;

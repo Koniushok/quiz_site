@@ -118,6 +118,7 @@ const TableList = props => {
   );
 };
 
+
 export default withRouter(
   connect(
     state => ({ state: state }),

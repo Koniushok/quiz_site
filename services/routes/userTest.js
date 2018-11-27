@@ -6,30 +6,12 @@ const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
 
-router.post("/new", auth, async (req, res) => {
-  const user = await User.findById(req.user._id);
-
-  const task = new Task({
-    question: "Where?",
-    answer1: "Answer1",
-    answer2: "Answer2",
-    answer3: "Answer3",
-    answer4: "Answer4",
-    correctAnswer: 1
-  });
-  user.tests = [new Test({ tasks: [task], name: "My second test" })];
-
-  user.save();
-  console.log(user);
-  res.send(user);
-});
-
 router.post("/", auth, async (req, res) => {
   const user = await User.findById(req.user._id);
 
   user.tests = [...user.tests, new Test({ tasks: [], name: req.body.name })];
 
-  user.save();
+  await user.save();
   res.send(user.tests);
 });
 
@@ -49,7 +31,7 @@ router.post("/edit", auth, async (req, res) => {
   }
 
   user.tests[index].name = req.body.name;
-  user.save();
+  await user.save();
   res.send(user.tests);
 });
 
@@ -67,7 +49,7 @@ router.delete("/:id", auth, async (req, res) => {
     return res.status(404).send("The test with the given ID was not found.");
   user.tests.splice(index, 1);
 
-  user.save();
+  await user.save();
 
   res.send(user.tests);
 });
@@ -121,7 +103,7 @@ router.post("/task", auth, async (req, res) => {
     new Task(req.body.task)
   ];
 
-  user.save();
+  await user.save();
   res.send(user.tests);
 });
 
@@ -139,7 +121,7 @@ router.post("/task/edit", auth, async (req, res) => {
   });
 
   user.tests[indexTest].tasks[indexTask] = req.body.task;
-  user.save();
+  await user.save();
   res.send(user.tests);
 });
 module.exports = router;
