@@ -95,6 +95,7 @@ class Registration extends Component {
       });
     } catch (ex) {
       const error = { ...this.state.error };
+      console.log(ex.message);
       error.all = ex.response.data;
       this.setState({ error });
     }

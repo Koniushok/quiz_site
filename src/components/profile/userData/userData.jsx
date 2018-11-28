@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { BgUserData, Title, TextInf, TitelInf } from "./style";
+import { BgUserData } from "./style";
+import { Title, TextInf, TitelInf } from "../style";
 import FomrUser from "../form/formUser.jsx";
 import { Button } from "../../../assets/styles/styledcomponents/component.js";
 import { connect } from "react-redux";

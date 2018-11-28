@@ -2,11 +2,14 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const auth = require("../middleware/auth");
 const { User, validate, validateUpData } = require("../models/user");
+const { Statistics } = require("../models/statistics");
 const express = require("express");
 const router = express.Router();
 
 router.get("/my", auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password");
+  const user = await User.findById(req.user._id).select(
+    "-password -statistics"
+  );
   if (!user) return res.status(400).send("no User");
   res.send(user);
 });

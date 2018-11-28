@@ -3,6 +3,7 @@ const users = require("./routes/users");
 const auth = require("./routes/auth");
 const userTest = require("./routes/userTest");
 const publicTests = require("./routes/publicTests");
+const statistics = require("./routes/statistics");
 //
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -25,6 +26,7 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/userTest", userTest);
 app.use("/api/publicTests", publicTests);
+app.use("/api/statistics", statistics);
 
 const port = process.env.PORT || config.get("port");
 app.listen(port, () => console.log(`Listening (port: ${port})`));

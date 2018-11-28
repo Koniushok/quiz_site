@@ -6,7 +6,8 @@ const initialState = {
     bgColor: "#24292e",
     minH: "72px"
   },
-  publicTests: []
+  publicTests: [],
+  statistics: {}
 };
 
 function reducer(state = initialState, action) {
@@ -27,6 +28,10 @@ function reducer(state = initialState, action) {
     }
     case "UPDATA_PUBLIC_TEST": {
       endState.publicTests = action.payload;
+      break;
+    }
+    case "UPDATA_STATICTICS": {
+      endState.statistics = action.payload;
       break;
     }
   }

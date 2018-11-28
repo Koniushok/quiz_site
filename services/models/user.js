@@ -3,6 +3,7 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const { TestSchema } = require("./test");
+const { StatisticsSchema, Statistics } = require("./statistics");
 
 const userSchema = new mongoose.Schema({
   login: {
@@ -27,7 +28,11 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 5, maxlength: 1024 },
   admin: Boolean,
-  tests: [TestSchema]
+  tests: [TestSchema],
+  statistics: {
+    type: StatisticsSchema,
+    default: new Statistics({})
+  }
 });
 
 userSchema.methods.GetAuthToken = function() {

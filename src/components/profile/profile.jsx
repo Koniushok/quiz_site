@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 //page
 import UserData from "./userData/userData.jsx";
 import UserTest from "./userTest/userTest.jsx";
+import Statistics from "./statistics/statistics.jsx";
 
 const urlProfile = "/profile";
 const MenuLinks = [
@@ -36,6 +37,7 @@ class Profile extends Component {
         <Switch>
           <Route path={urlProfile + "/data"} component={UserData} />
           <Route path={urlProfile + "/mytest"} component={UserTest} />
+          <Route path={urlProfile + "/statistics"} component={Statistics} />
         </Switch>
       </BgProfile>
     );

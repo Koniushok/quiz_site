@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Bg, QuestionText, QuestionBlock, Title, Answer } from "./style.js";
 import { Button } from "../../assets/styles/styledcomponents/component.js";
 
+import request from "../../services/requestServer";
+import { API_END_POINT } from "../../config/constants";
+import { dispatch } from "../../store/index";
+
 class PassTest extends Component {
   handleSubmit = event => {
     event.preventDefault();
@@ -14,8 +18,21 @@ class PassTest extends Component {
         correctly: res
       };
     });
+    this.postStatictic(num, this.props.test.tasks.length);
     this.props.resultTest(resultTest, num);
   };
+
+  postStatictic = async (numCorrect, length) => {
+    try {
+      const result = await request.post(
+        API_END_POINT + "/api/statistics/publicTest",
+        { correct: numCorrect, questions: length }
+      );
+    } catch (ex) {
+      console.error(ex);
+    }
+  };
+
   render() {
     const { test } = this.props;
     return (
