@@ -19,6 +19,15 @@ export async function login() {
   }
 }
 
+export async function getPublicTests() {
+  try {
+    const result = await request.get(API_END_POINT + "/api/statistics");
+    dispatch("UPDATA_STATICTICS", result.data);
+  } catch (ex) {
+    console.error(ex);
+  }
+}
+
 export async function authorization(login, password) {
   const { data } = await request.post(API_END_POINT + "/api/auth", {
     login: login,

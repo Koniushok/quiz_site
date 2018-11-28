@@ -5,9 +5,10 @@ import Header from "./components/header/header.jsx";
 import Footer from "./components/footer/footer.jsx";
 import Main from "./components/main/main.jsx";
 import { dispatch } from "rxjs/internal/observable/pairs";
-import { login } from "./services/auth.js";
+import { login, getPublicTests } from "./services/auth.js";
 
 login();
+getPublicTests();
 
 class App extends Component {
   render() {

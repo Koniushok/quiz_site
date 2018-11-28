@@ -14,11 +14,24 @@ router.get("/", auth, async (req, res) => {
 router.post("/publicTest", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("statistics");
   if (!user) return res.status(400).send("no User");
-  user.statistics.publicTest++;
-  user.statistics.publicСorrect += req.body.correct;
-  user.statistics.publicQuestions += req.body.questions;
+
+  let { statistics } = user;
+
+  var index = _.findIndex(statistics.publicPassed, function(item) {
+    return item == req.body.testId;
+  });
+  if (index === -1)
+    user.statistics.publicPassed = [
+      ...user.statistics.publicPassed,
+      req.body.testId
+    ];
+  statistics.publicTest++;
+  statistics.publicСorrect += req.body.correct;
+  statistics.publicQuestions += req.body.questions;
+
+  user.statistics = statistics;
   await user.save();
-  res.send(user.statistics);
+  res.send(statistics);
 });
 
 module.exports = router;

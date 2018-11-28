@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { green } from "ansi-colors";
 
 export const BgTests = styled.div`
   flex: auto;
@@ -8,12 +9,15 @@ export const BgTests = styled.div`
 `;
 
 export const TableItem = styled.tr`
-  & td {
-    font-size: 18px;
-  }
   background: ${props => props.active && "#d1d5a6"};
   :hover {
     background: #7575755e;
     cursor: pointer;
   }
+`;
+
+export const Tdata = styled.td`
+  font-size: 20px;
+  font-weight: 500;
+  color: ${props => props.active && "#75e875"};
 `;

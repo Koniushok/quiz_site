@@ -11,23 +11,23 @@ class PassTest extends Component {
     event.preventDefault();
     let num = 0;
     const resultTest = this.props.test.tasks.map((task, index) => {
-      //console.log("Q" + index + "==", event.target["question" + index].value);
       const res = event.target["question" + index].value == task.correctAnswer;
       if (res) num++;
       return {
         correctly: res
       };
     });
-    this.postStatictic(num, this.props.test.tasks.length);
+    this.postStatictic(num, this.props.test.tasks.length, this.props.test._id);
     this.props.resultTest(resultTest, num);
   };
 
-  postStatictic = async (numCorrect, length) => {
+  postStatictic = async (numCorrect, length, id) => {
     try {
       const result = await request.post(
         API_END_POINT + "/api/statistics/publicTest",
-        { correct: numCorrect, questions: length }
+        { correct: numCorrect, questions: length, testId: id }
       );
+      dispatch("UPDATA_STATICTICS", result.data);
     } catch (ex) {
       console.error(ex);
     }

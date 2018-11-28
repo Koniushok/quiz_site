@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { BgTests, TableItem } from "./style.js";
+import { BgTests, TableItem, Tdata } from "./style.js";
 import { Button } from "../../assets/styles/styledcomponents/component";
 import { connect } from "react-redux";
 import { Table } from "reactstrap";
 import { withRouter } from "react-router-dom";
 
 import PassTest from "../passTest/passTest.jsx";
-
+import _ from "lodash";
 import request from "../../services/requestServer.js";
 import { API_END_POINT } from "../../config/constants.js";
 import { dispatch } from "../../store/index.js";
@@ -54,6 +54,7 @@ class Tests extends Component {
   };
   render() {
     const { publicTests } = this.props.state;
+    const { statistics } = this.props.state;
     return (
       <BgTests>
         {this.state.pass ? (
@@ -75,6 +76,7 @@ class Tests extends Component {
               testsActive={this.state.testsActive}
               СhoiceTest={this.СhoiceTest}
               tests={publicTests}
+              publicPassed={statistics.publicPassed}
             />
             {this.state.testsActive && (
               <Button width="300px" margin="0 auto" light onClick={this.onPass}>
@@ -89,7 +91,7 @@ class Tests extends Component {
 }
 
 const TableList = props => {
-  const { tests, testsActive, СhoiceTest } = props;
+  const { tests, testsActive, СhoiceTest, publicPassed } = props;
   return (
     <Table>
       <thead>
@@ -98,6 +100,7 @@ const TableList = props => {
           <th>Name Test</th>
           <th>Task</th>
           <th>Public</th>
+          <th>Passed</th>
         </tr>
       </thead>
       <tbody>
@@ -107,17 +110,23 @@ const TableList = props => {
             key={test._id}
             onClick={() => СhoiceTest(test)}
           >
-            <td scope="row">{index + 1}</td>
-            <td>{test.name}</td>
-            <td>{test.tasks.length}</td>
-            <td>{test.public + ""}</td>
+            <Tdata scope="row">{index + 1}</Tdata>
+            <Tdata>{test.name}</Tdata>
+            <Tdata>{test.tasks.length}</Tdata>
+            <Tdata>{test.public + ""}</Tdata>
+            <Tdata>
+              {(-1 !=
+                _.findIndex(publicPassed, function(item) {
+                  return item == test._id;
+                })) +
+                ""}
+            </Tdata>
           </TableItem>
         ))}
       </tbody>
     </Table>
   );
 };
-
 
 export default withRouter(
   connect(

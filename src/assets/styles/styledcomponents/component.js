@@ -17,6 +17,7 @@ const StButton = css`
   &:hover {
     border: solid 2px #d7ad1b;
     color: #d7ad1b;
+    cursor: pointer;
   }
 
   ${props =>

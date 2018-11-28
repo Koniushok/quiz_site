@@ -13,7 +13,8 @@ const statisticsSchema = new mongoose.Schema({
   publicQuestions: {
     type: Number,
     default: 0
-  }
+  },
+  publicPassed: [mongoose.Schema.Types.ObjectId]
 });
 
 function validateTest(user) {
