@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 const { taskSchema } = require("./task");
+const { TestStatisticsSchema, TestStatistics } = require("./testStatistics");
 
 const testSchema = new mongoose.Schema({
   tasks: [taskSchema],
@@ -8,7 +9,8 @@ const testSchema = new mongoose.Schema({
   public: {
     type: Boolean,
     default: true
-  }
+  },
+  statistics: { type: TestStatisticsSchema, default: new TestStatistics({}) }
 });
 
 function validateTest(user) {

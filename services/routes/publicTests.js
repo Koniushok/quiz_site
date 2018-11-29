@@ -5,7 +5,6 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
-  console.log("public Tests");
   const testsArray = await User.find({ tests: { $ne: [] } }).select("tests");
 
   let tests = [];
@@ -14,7 +13,6 @@ router.get("/", auth, async (req, res) => {
       if (test.public) tests = [...tests, test];
     });
   });
-  console.log(tests);
   res.send(tests);
 });
 

@@ -58,6 +58,6 @@ const tasks = [
     correctAnswer: "2"
   })
 ];
-user.tests = [new Test({ tasks: tasks, name: "Main Test" })];
-
+const test = new Test({ tasks: tasks, name: "Main Test" });
+user.tests = [test];
 user.save();

@@ -22,12 +22,23 @@ class PassTest extends Component {
   };
 
   postStatictic = async (numCorrect, length, id) => {
+    let result;
     try {
-      const result = await request.post(
+      result = await request.post(
         API_END_POINT + "/api/statistics/publicTest",
         { correct: numCorrect, questions: length, testId: id }
       );
       dispatch("UPDATA_STATICTICS", result.data);
+    } catch (ex) {
+      console.error(ex);
+    }
+
+    try {
+      result = await request.post(API_END_POINT + "/api/testStatictics", {
+        testId: id,
+        correct: numCorrect,
+        questions: length
+      });
     } catch (ex) {
       console.error(ex);
     }
@@ -45,7 +56,6 @@ class PassTest extends Component {
               this.props.result.length}{" "}
           </Title>
         )}
-
         <form onSubmit={this.handleSubmit}>
           {test.tasks.map((task, index) => {
             return (
