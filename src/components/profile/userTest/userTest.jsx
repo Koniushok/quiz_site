@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import TestTable from "./testTable";
 import TaskTable from "./taskTable";
+import { TextInf } from "../../../assets/styles/styledcomponents/component";
 
 class UserTest extends Component {
   state = {
@@ -59,7 +60,7 @@ class UserTest extends Component {
           testsActive={this.state.testsActive}
           СhoiceTest={this.СhoiceTest}
         />
-        {this.state.testsActive && (
+        {this.state.testsActive ? (
           <TaskTable
             onForm={this.onTaskForm}
             onFormEdit={this.onTaskFormEdit}
@@ -69,6 +70,8 @@ class UserTest extends Component {
             taskActive={this.state.taskActive}
             СhoiceTask={this.СhoiceTask}
           />
+        ) : (
+          <TextInf>select test</TextInf>
         )}
       </BgUserTest>
     );

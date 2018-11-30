@@ -19,7 +19,7 @@ export async function login() {
   }
 }
 
-export async function getPublicTests() {
+export async function getStatistics() {
   try {
     const result = await request.get(API_END_POINT + "/api/statistics");
     dispatch("UPDATA_STATICTICS", result.data);

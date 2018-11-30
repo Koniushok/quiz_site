@@ -36,8 +36,13 @@ class Statistics extends Component {
           <LabelInf
             title="percent correct"
             value={
-              (statistics.publicСorrect / statistics.publicQuestions) * 100 +
-              "%"
+              statistics.publicСorrect
+                ? (
+                    statistics.publicСorrect / statistics.publicQuestions
+                  ).toFixed(4) *
+                    100 +
+                  "%"
+                : "0%"
             }
           />
         </BlockStat>

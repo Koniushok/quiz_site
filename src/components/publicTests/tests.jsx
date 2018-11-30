@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { BgTests, TableItem, Tdata } from "./style.js";
-import { Button } from "../../assets/styles/styledcomponents/component";
+import { BgTests, TableItem, Tdata, Divflex } from "./style.js";
+import {
+  Button,
+  TextInf
+} from "../../assets/styles/styledcomponents/component";
 import { connect } from "react-redux";
 import { Table } from "reactstrap";
 import { withRouter } from "react-router-dom";
@@ -26,6 +29,9 @@ class Tests extends Component {
   componentDidMount() {
     this.getPublicTests();
   }
+  upData = () => {
+    this.getPublicTests();
+  };
   getPublicTests = async () => {
     try {
       const result = await request.get(API_END_POINT + "/api/publicTests");
@@ -71,17 +77,24 @@ class Tests extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <h1>List public tests</h1>
+            <Divflex>
+              <h1>List public tests</h1>
+              <Button light onClick={this.upData}>
+                upDate
+              </Button>
+            </Divflex>
             <TableList
               testsActive={this.state.testsActive}
               СhoiceTest={this.СhoiceTest}
               tests={publicTests}
               publicPassed={statistics.publicPassed}
             />
-            {this.state.testsActive && (
+            {this.state.testsActive ? (
               <Button width="300px" margin="0 auto" light onClick={this.onPass}>
                 Pass the test
               </Button>
+            ) : (
+              <TextInf>select test</TextInf>
             )}
           </React.Fragment>
         )}
@@ -101,6 +114,8 @@ const TableList = props => {
           <th>Task</th>
           <th>Public</th>
           <th>Passed</th>
+          <th>number of passes</th>
+          <th>percent correct</th>
         </tr>
       </thead>
       <tbody>
@@ -120,6 +135,16 @@ const TableList = props => {
                   return item == test._id;
                 })) +
                 ""}
+            </Tdata>
+            <Tdata>{test.statistics.passes + ""}</Tdata>
+            <Tdata>
+              {test.statistics.correctAnswer
+                ? (
+                    test.statistics.correctAnswer / test.statistics.questions
+                  ).toFixed(4) *
+                    100 +
+                  "%"
+                : "0%"}
             </Tdata>
           </TableItem>
         ))}

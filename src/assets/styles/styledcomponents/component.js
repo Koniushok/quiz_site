@@ -53,3 +53,11 @@ export const Title = styled.p`
   font-size: 30px;
   font-weight: bold;
 `;
+
+export const TextInf = styled.p`
+  font-weight: bold;
+  color: #c7c7c7;
+  margin-top: 50px;
+  text-align: center;
+  font-size: 30px;
+`;

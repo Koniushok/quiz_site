@@ -21,3 +21,8 @@ export const Tdata = styled.td`
   font-weight: 500;
   color: ${props => props.active && "#75e875"};
 `;
+
+export const Divflex = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
