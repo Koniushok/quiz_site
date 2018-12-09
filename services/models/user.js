@@ -28,11 +28,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 5, maxlength: 1024 },
   admin: Boolean,
-  tests: [TestSchema],
-  statistics: {
-    type: StatisticsSchema,
-    default: new Statistics({})
-  }
+  tests: [{ type: mongoose.Schema.Types.ObjectId, ref: "Test" }],
+  statistics: [{ type: mongoose.Schema.Types.ObjectId, ref: "Statistics" }]
 });
 
 userSchema.methods.GetAuthToken = function() {

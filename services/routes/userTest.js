@@ -7,41 +7,39 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", auth, async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user._id).populate("tests");
 
-  user.tests = [...user.tests, new Test({ tasks: [], name: req.body.name })];
+  const test = new Test({ tasks: [], name: req.body.name });
+  test.save();
 
-  await user.save();
-  res.send(user.tests);
+  user.tests = [...user.tests, test._id];
+
+  await tests.save();
+  res.send(user); //user.tests
+});
+
+router.get("/", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).populate("tests");
+
+  res.send(user.tests); //user.tests
 });
 
 router.post("/edit", auth, async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const test = Test.findById(req.body.id);
+  test.name = req.body.name;
 
-  tests = [...user.tests];
-
-  var index = -1;
-  tests.map((t, i) => {
-    if (t._id == req.body.id) {
-      index = i;
-    }
-  });
-  if (index === -1) {
-    return res.status(404).send("The test with the given ID was not found.");
-  }
-
-  user.tests[index].name = req.body.name;
-  await user.save();
+  await test.save();
+  const user = await User.findById(req.user._id).populate("tests");
   res.send(user.tests);
 });
 
 router.delete("/:id", auth, async (req, res) => {
-  const user = await User.findById(req.user._id);
+  let user = await User.findById(req.user._id);
   tests = [...user.tests];
 
   var index = -1;
   tests.map((t, i) => {
-    if (t._id == req.params.id) {
+    if (t == req.params.id) {
       index = i;
     }
   });
@@ -51,6 +49,8 @@ router.delete("/:id", auth, async (req, res) => {
 
   await user.save();
 
+  Test.deleteOne({ _id: req.params.id });
+  const user = await User.findById(req.user._id).populate("tests");
   res.send(user.tests);
 });
 

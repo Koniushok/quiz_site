@@ -3,13 +3,9 @@ const { Test } = require("./models/test");
 const { Task } = require("./models/task");
 const mongoose = require("mongoose");
 const config = require("config");
+const bcrypt = require("bcrypt");
 
-mongoose
-  .connect(config.get("db"))
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error("Could not connect to MongoDB"));
-
-user = new User({
+const user = new User({
   login: "maindata",
   name: "maindata",
   email: "maindata@gmail.com",
@@ -59,5 +55,22 @@ const tasks = [
   })
 ];
 const test = new Test({ tasks: tasks, name: "Main Test" });
-user.tests = [test];
-user.save();
+
+const connect = async () => {
+  await mongoose
+    .connect(config.get("db"))
+    .then(() => console.log("Connected to MongoDB"))
+    .catch(err => console.error("Could not connect to MongoDB"));
+
+  Save(user, test);
+};
+connect();
+
+async function Save(user, test) {
+  await test.save();
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+  user.tests = [test._id];
+  await user.save();
+  console.log("DATA SAVE");
+}
