@@ -24,7 +24,6 @@ class UserTest extends Component {
           this.props.taskActive._id
       );
       this.props.СhoiceTask(null);
-      console.log(result.data);
       dispatch("UPDATA_TEST", result.data);
     } catch (ex) {
       console.error(ex);
@@ -102,7 +101,7 @@ const TableTask = props => {
               onClick={() => Сhoicetask(task)}
               active={taskActive && taskActive._id === task._id}
             >
-              <td scope="row">{index + 1}</td>
+              <td>{index + 1}</td>
               <td>{task.answer1}</td>
               <td>{task.answer2}</td>
               <td>{task.answer3}</td>
@@ -119,9 +118,10 @@ const TableTask = props => {
 const GetIndexTest = (tests, id) => {
   let index = -1;
   tests.map((t, i) => {
-    if (t._id == id) {
+    if ("" + t._id === "" + id) {
       index = i;
     }
+    return null;
   });
   return index;
 };

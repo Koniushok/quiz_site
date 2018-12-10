@@ -35,7 +35,6 @@ export async function getUserTest() {
   try {
     const result = await request.get(API_END_POINT + "/api/userTest");
     dispatch("UPDATA_TEST", result.data);
-    console.log("getUserTest", result.data);
   } catch (ex) {
     console.error(ex);
   }
@@ -48,5 +47,4 @@ export async function authorization(login, password) {
   });
   request.setJwt(data.jwt);
   dispatch("ADD_USER", data.user);
-  console.log("authorization:", data.user);
 }

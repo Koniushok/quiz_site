@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BgUserTest, TableItem, BgTable } from "./style";
+import { BgUserTest } from "./style";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import TestTable from "./testTable";

@@ -35,6 +35,9 @@ function reducer(state = initialState, action) {
       endState.statistics = action.payload;
       break;
     }
+    default: {
+      break;
+    }
   }
 
   console.log("changes Store:", endState);
@@ -45,6 +48,7 @@ const store = createStore(reducer);
 
 export function dispatch(type, payload) {
   store.dispatch({ type, payload });
+  console.log("dispatch:\ntype:", type, "\npayload:", payload);
 }
 
 export default store;

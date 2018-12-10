@@ -35,10 +35,6 @@ class Tests extends Component {
   getPublicTests = async () => {
     try {
       const result = await request.get(API_END_POINT + "/api/publicTests");
-      console.log("PublicTests", result.data);
-      result.data.map(t => {
-        console.log("11", t);
-      });
       dispatch("UPDATA_PUBLIC_TEST", result.data);
     } catch (ex) {
       console.error(ex);
@@ -130,9 +126,9 @@ const TableList = props => {
             <Tdata>{test.tasks.length}</Tdata>
             <Tdata>{test.public + ""}</Tdata>
             <Tdata>
-              {(-1 !=
+              {(-1 !==
                 _.findIndex(publicPassed, function(item) {
-                  return item == test._id;
+                  return item === test._id;
                 })) +
                 ""}
             </Tdata>

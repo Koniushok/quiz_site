@@ -51,7 +51,6 @@ class TestTable extends Component {
         API_END_POINT + "/api/userTest/" + this.props.testsActive._id
       );
       this.props.СhoiceTest(null);
-      console.log(result.data);
       dispatch("UPDATA_TEST", result.data);
     } catch (ex) {
       console.error(ex);
@@ -119,7 +118,7 @@ const TableList = props => {
             key={test._id}
             onClick={() => СhoiceTest(test)}
           >
-            <td scope="row">{index + 1}</td>
+            <td>{index + 1}</td>
             <td>{test.name}</td>
             <td>{test.tasks.length}</td>
             <td>{test.public + ""}</td>
@@ -160,7 +159,6 @@ const FormEdit = props => {
       <input
         name="testNameEdit"
         type="text"
-        required
         id="Idname"
         required
         className="form-control"

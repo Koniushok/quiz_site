@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import request from "../../../services/requestServer.js";
 import Joi from "joi-browser";
 
-import _ from "lodash";
 import { dispatch } from "../../../store/index.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import { Button } from "../../../assets/styles/styledcomponents/component.js";
@@ -96,15 +95,13 @@ class FormTask extends Form {
           task: this.state.data,
           testId: this.props.test._id
         });
-        console.log(result.data);
       }
-      console.log(result.data);
       this.setState({ result: "Successfully changed" });
       dispatch("UPDATA_TEST", result.data);
     } catch (ex) {
       const errors = { ...this.state.errors };
       errors.all = ex.response.data;
-      console.log(ex.response.data);
+      console.log("Form task Error:", ex.response.data);
       this.setState({ errors });
     }
   };

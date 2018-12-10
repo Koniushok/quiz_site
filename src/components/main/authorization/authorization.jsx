@@ -23,7 +23,6 @@ class Authorization extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.postAuthorization();
-    console.log("Authorization hendle", this.state.account);
   };
   postAuthorization = async () => {
     try {

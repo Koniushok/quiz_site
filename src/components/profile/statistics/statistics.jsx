@@ -14,7 +14,6 @@ class Statistics extends Component {
   getPublicTests = async () => {
     try {
       const result = await request.get(API_END_POINT + "/api/statistics");
-      console.log(result.data);
       dispatch("UPDATA_STATICTICS", result.data);
     } catch (ex) {
       console.error(ex);

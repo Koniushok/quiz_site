@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const FooterDiv = styled.div`
   background: ${props => props.bg};

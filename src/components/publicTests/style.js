@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { green } from "ansi-colors";
 
 export const BgTests = styled.div`
   flex: auto;

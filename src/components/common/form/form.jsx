@@ -16,7 +16,7 @@ class Form extends Component {
       this.schema,
       options
     );
-    console.log(error);
+    console.log("Form validate Error", error);
     if (!error) return null;
 
     const errors = {};

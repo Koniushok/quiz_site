@@ -30,7 +30,6 @@ const MenuLinks = [
 
 class Profile extends Component {
   render() {
-    const { user } = this.props.state;
     return (
       <BgProfile>
         <Sidebar MenuLinks={MenuLinks} />

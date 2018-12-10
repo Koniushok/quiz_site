@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 //style
 import { NavItem, HeaderDiv } from "./styles/styled.js";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";

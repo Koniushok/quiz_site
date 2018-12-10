@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import request from "../../../services/requestServer.js";
 import Joi from "joi-browser";
 
