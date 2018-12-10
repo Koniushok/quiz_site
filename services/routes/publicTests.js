@@ -1,18 +1,12 @@
 const _ = require("lodash");
 const auth = require("../middleware/auth");
-const { User } = require("../models/user");
+const { Test } = require("../models/test");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
-  const testsArray = await User.find({ tests: { $ne: [] } }).select("tests");
+  const tests = await Test.find({ public: true });
 
-  let tests = [];
-  testsArray.map(t => {
-    t.tests.map(test => {
-      if (test.public) tests = [...tests, test];
-    });
-  });
   res.send(tests);
 });
 

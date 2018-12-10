@@ -1,10 +1,10 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
-const { taskSchema } = require("./task");
+const { taskSchema, Task } = require("./task");
 const { TestStatisticsSchema, TestStatistics } = require("./testStatistics");
 
 const testSchema = new mongoose.Schema({
-  tasks: [taskSchema],
+  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
   name: String,
   public: {
     type: Boolean,

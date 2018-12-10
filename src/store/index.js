@@ -2,6 +2,7 @@ import { createStore } from "redux";
 
 const initialState = {
   user: {},
+  myTests: null,
   style: {
     bgColor: "#24292e",
     minH: "72px"
@@ -22,8 +23,8 @@ function reducer(state = initialState, action) {
       break;
     }
     case "UPDATA_TEST": {
-      console.log("New Test:", action.payload);
       endState.user.tests = action.payload;
+      endState.myTests = action.payload;
       break;
     }
     case "UPDATA_PUBLIC_TEST": {

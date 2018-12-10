@@ -52,8 +52,8 @@ class UserTest extends Component {
   };
 
   render() {
-    const { user } = this.props.state;
-
+    const { myTests } = this.props.state;
+    if (!myTests) return null;
     return (
       <BgUserTest>
         <TestTable

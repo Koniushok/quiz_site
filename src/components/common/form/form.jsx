@@ -12,11 +12,10 @@ class Form extends Component {
   validate = () => {
     const options = { abortEarly: false };
     const { error } = Joi.validate(
-      _.omit(this.state.data, ["_id"]),
+      _.omit(this.state.data, ["_id", "__v"]),
       this.schema,
       options
     );
-
     console.log(error);
     if (!error) return null;
 
@@ -34,6 +33,7 @@ class Form extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;

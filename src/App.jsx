@@ -5,10 +5,9 @@ import Header from "./components/header/header.jsx";
 import Footer from "./components/footer/footer.jsx";
 import Main from "./components/main/main.jsx";
 import { dispatch } from "rxjs/internal/observable/pairs";
-import { login, getStatistics } from "./services/auth.js";
+import { login, getStatistics, getUserTest } from "./services/auth.js";
 
 login();
-getStatistics();
 
 class App extends Component {
   render() {
