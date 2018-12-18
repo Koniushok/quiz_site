@@ -5,8 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
-  const tests = await Test.find({ public: true });
-
+  const tests = await Test.find({ public: true }).populate("tasks");
   res.send(tests);
 });
 

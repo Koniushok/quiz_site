@@ -7,7 +7,6 @@ const router = express.Router();
 router.get("/", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("statistics");
   if (!user) return res.status(400).send("no User");
-  console.log(user.statistics);
   res.send(user.statistics);
 });
 

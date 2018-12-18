@@ -28,8 +28,11 @@ router.post("/", async (req, res) => {
     _.pick(req.body, ["login", "name", "email", "password", "surname"])
   );
 
+  const statistics = new Statistics();
+
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
+  user.statistics = statistics;
 
   await user.save();
   res.send("Successfully registered");

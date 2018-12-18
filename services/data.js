@@ -54,8 +54,8 @@ const tasks = [
     correctAnswer: "2"
   })
 ];
-const test = new Test({ tasks: tasks, name: "Main Test" });
 
+const test = new Test({ tasks: tasks, name: "Main Test" });
 const connect = async () => {
   await mongoose
     .connect(config.get("db"))
@@ -67,6 +67,9 @@ const connect = async () => {
 connect();
 
 async function Save(user, test) {
+  tasks.map(async task => {
+    await task.save();
+  });
   await test.save();
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);

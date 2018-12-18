@@ -47,8 +47,8 @@ function reducer(state = initialState, action) {
 const store = createStore(reducer);
 
 export function dispatch(type, payload) {
-  store.dispatch({ type, payload });
   console.log("dispatch:\ntype:", type, "\npayload:", payload);
+  store.dispatch({ type, payload });
 }
 
 export default store;
