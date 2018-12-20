@@ -34,7 +34,7 @@ class PassTest extends Component {
     }
 
     try {
-      result = await request.post(API_END_POINT + "/api/testStatictics", {
+      result = await request.post(API_END_POINT + "/api/testStatistics", {
         testId: id,
         correct: numCorrect,
         questions: length

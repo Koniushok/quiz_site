@@ -4,7 +4,7 @@ const auth = require("./routes/auth");
 const userTest = require("./routes/userTest");
 const publicTests = require("./routes/publicTests");
 const statistics = require("./routes/statistics");
-const testStatictics = require("./routes/testStatictics");
+const testStatistics = require("./routes/testStatistics");
 //
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -28,7 +28,7 @@ app.use("/api/auth", auth);
 app.use("/api/userTest", userTest);
 app.use("/api/publicTests", publicTests);
 app.use("/api/statistics", statistics);
-app.use("/api/testStatictics", testStatictics);
+app.use("/api/testStatistics", testStatistics);
 
 const port = process.env.PORT || config.get("port");
 app.listen(port, () => console.log(`Listening (port: ${port})`));
