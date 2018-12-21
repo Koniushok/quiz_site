@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import { Button } from "../styledcomponents/component";
 import _ from "lodash";
+
+import { Button } from "../styledcomponents/component";
 
 class Form extends Component {
   state = {

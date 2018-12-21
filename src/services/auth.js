@@ -2,6 +2,8 @@ import request from "./requestServer.js";
 import { dispatch } from "../store/index.js";
 import { API_END_POINT } from "../config/constants.js";
 
+const url = "/api/auth";
+
 export function logout() {
   request.removeJwt();
   dispatch("ADD_USER", {});

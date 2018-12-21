@@ -2,8 +2,7 @@ import React from "react";
 import request from "../../../services/requestServer.js";
 import Joi from "joi-browser";
 
-import { dispatch } from "../../../store/index.js";
-import { API_END_POINT } from "../../../config/constants.js";
+import { addTask, editTask } from "../../../services/userTest";
 import { Button } from "../styledcomponents/component";
 
 import Form from "./form";
@@ -86,15 +85,9 @@ class FormTask extends Form {
     try {
       let result;
       if (!this.props.edit) {
-        result = await request.post(API_END_POINT + "/api/userTest/task", {
-          task: this.state.data,
-          testId: this.props.test._id
-        });
+        result = await addTask(this.state.data, this.props.test._id);
       } else {
-        result = await request.post(API_END_POINT + "/api/userTest/task/edit", {
-          task: this.state.data,
-          testId: this.props.test._id
-        });
+        result = await editTask(this.state.data, this.props.test._id);
       }
       this.setState({ result: "Successfully changed" });
       dispatch("UPDATA_TEST", result.data);

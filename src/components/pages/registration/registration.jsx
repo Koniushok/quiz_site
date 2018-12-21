@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import request from "../../../services/requestServer.js";
+import { addUser } from "../../../services/users";
 import { BgRegisration, FormRegistration } from "./style.js";
-import { API_END_POINT } from "../../../config/constants.js";
 import { Button, Title } from "../../common/styledcomponents/component";
 
 const formItems = [
@@ -79,7 +78,7 @@ class Registration extends Component {
   }
   PostRegisration = async account => {
     try {
-      const result = await request.post(API_END_POINT + "/api/users", account);
+      const result = await addUser(account);
       this.setState({ result: result.data });
       this.setState({
         account: {

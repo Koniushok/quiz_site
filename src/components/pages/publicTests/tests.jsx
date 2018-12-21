@@ -9,8 +9,7 @@ import { Button, TextInf } from "../../common/styledcomponents/component";
 
 import PassTest from "../../passTest/passTest.jsx";
 
-import request from "../../../services/requestServer.js";
-import { API_END_POINT } from "../../../config/constants.js";
+import { getPublicTest } from "../../../services/publicTests";
 import { dispatch } from "../../../store/index.js";
 
 class Tests extends Component {
@@ -33,7 +32,7 @@ class Tests extends Component {
   };
   getPublicTests = async () => {
     try {
-      const result = await request.get(API_END_POINT + "/api/publicTests");
+      const result = await getPublicTest();
       dispatch("UPDATA_PUBLIC_TEST", result.data);
     } catch (ex) {
       console.error(ex);

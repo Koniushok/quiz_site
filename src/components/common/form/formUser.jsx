@@ -1,9 +1,8 @@
 import React from "react";
-import request from "../../../services/requestServer";
 import Joi from "joi-browser";
 
+import { userEdit } from "../../../services/users";
 import { dispatch } from "../../../store/index.js";
-import { API_END_POINT } from "../../../config/constants.js";
 import { Button } from "../styledcomponents/component";
 
 import Form from "./form";
@@ -55,13 +54,9 @@ class Edit extends Form {
 
   doSubmit = async () => {
     try {
-      const result = await request.post(
-        API_END_POINT + "/api/users/edit",
-        this.state.data
-      );
+      const result = await userEdit(this.state.data);
       this.setState({ result: "Successfully changed" });
       dispatch("ADD_USER", result.data);
-      //this.setState({ result: result.data });
     } catch (ex) {
       const errors = { ...this.state.errors };
       errors.all = ex.response.data;

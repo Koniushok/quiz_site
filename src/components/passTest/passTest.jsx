@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Bg, QuestionText, QuestionBlock, Title, Answer } from "./style.js";
 import { Button } from "../common/styledcomponents/component";
 
-import request from "../../services/requestServer";
-import { API_END_POINT } from "../../config/constants";
+import { updateStatistics } from "../../services/userSatistics";
+import { updateTestStatistics } from "../../services/testStatistics";
 import { dispatch } from "../../store/index";
 
 class PassTest extends Component {
@@ -24,21 +24,14 @@ class PassTest extends Component {
   postStatictic = async (numCorrect, length, id) => {
     let result;
     try {
-      result = await request.post(
-        API_END_POINT + "/api/statistics/publicTest",
-        { correct: numCorrect, questions: length, testId: id }
-      );
+      result = await updateStatistics(numCorrect, length, id);
       dispatch("UPDATA_STATICTICS", result.data);
     } catch (ex) {
       console.error(ex);
     }
 
     try {
-      result = await request.post(API_END_POINT + "/api/testStatistics", {
-        testId: id,
-        correct: numCorrect,
-        questions: length
-      });
+      updateTestStatistics(id, numCorrect, length);
     } catch (ex) {
       console.error(ex);
     }

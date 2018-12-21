@@ -6,8 +6,7 @@ import { withRouter } from "react-router-dom";
 import { TableItem, BgTable, TableControl } from "./style";
 import { Button } from "../../common/styledcomponents/component";
 import FormTask from "../../common/form/formTask";
-import request from "../../../services/requestServer";
-import { API_END_POINT } from "../../../config/constants";
+import { deleteTask } from "../../../services/userTest";
 import { dispatch } from "../../../store/index";
 
 class UserTest extends Component {
@@ -17,12 +16,9 @@ class UserTest extends Component {
 
   handleDelete = async () => {
     try {
-      const result = await request.delete(
-        API_END_POINT +
-          "/api/userTest/task/" +
-          this.props.testsActive._id +
-          "/" +
-          this.props.taskActive._id
+      const result = await deleteTask(
+        this.props.testsActive._id,
+        this.props.taskActive._id
       );
       this.props.СhoiceTask(null);
       dispatch("UPDATA_TEST", result.data);

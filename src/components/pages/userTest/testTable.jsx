@@ -5,8 +5,7 @@ import { withRouter } from "react-router-dom";
 
 import { TableItem, BgTable, TableForm, TableControl } from "./style";
 import { Button } from "../../common/styledcomponents/component";
-import request from "../../../services/requestServer.js";
-import { API_END_POINT } from "../../../config/constants.js";
+import { addTest, editTest, deleteTest } from "../../../services/userTest";
 import { dispatch } from "../../../store/index.js";
 
 class TestTable extends Component {
@@ -24,9 +23,7 @@ class TestTable extends Component {
   handleTestAdd = async e => {
     e.preventDefault();
     try {
-      const result = await request.post(API_END_POINT + "/api/userTest", {
-        name: this.state.testName
-      });
+      const result = await awaitaddTest(this.state.testName);
       this.setState({ testName: "" });
       dispatch("UPDATA_TEST", result.data);
     } catch (ex) {
@@ -36,10 +33,10 @@ class TestTable extends Component {
   handleTestEdit = async e => {
     e.preventDefault();
     try {
-      const result = await request.post(API_END_POINT + "/api/userTest/edit", {
-        name: this.state.testNameEdit,
-        id: this.props.testsActive._id
-      });
+      const result = await editTest(
+        this.state.testNameEdit,
+        this.props.testsActive._id
+      );
       dispatch("UPDATA_TEST", result.data);
       this.setState({ testNameEdit: "" });
     } catch (ex) {
@@ -48,9 +45,7 @@ class TestTable extends Component {
   };
   handleDelete = async () => {
     try {
-      const result = await request.delete(
-        API_END_POINT + "/api/userTest/" + this.props.testsActive._id
-      );
+      const result = await deleteTest(this.props.testsActive._id);
       this.props.СhoiceTest(null);
       dispatch("UPDATA_TEST", result.data);
     } catch (ex) {

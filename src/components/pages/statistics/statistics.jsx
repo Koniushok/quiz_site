@@ -5,8 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Bg, BlockStat } from "./style";
 import { Title, TextInf, TitelInf } from "../profile/style";
 
-import request from "../../../services/requestServer";
-import { API_END_POINT } from "../../../config/constants";
+import { getStatistics } from "../../../services/userSatistics";
 import { dispatch } from "../../../store/index";
 class Statistics extends Component {
   componentDidMount() {
@@ -14,7 +13,7 @@ class Statistics extends Component {
   }
   getPublicTests = async () => {
     try {
-      const result = await request.get(API_END_POINT + "/api/statistics");
+      const result = await getStatistics();
       dispatch("UPDATA_STATICTICS", result.data);
     } catch (ex) {
       console.error(ex);
