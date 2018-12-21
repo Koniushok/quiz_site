@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 //Styled
 import { BgHome } from "./style.js";
-import { BtBlock } from "../../../assets/styles/styledcomponents/component.js";
+import { BtBlock } from "../../common/styledcomponents/component";
 
 class Home extends Component {
   render() {

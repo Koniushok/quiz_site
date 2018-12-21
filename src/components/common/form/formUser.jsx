@@ -1,12 +1,12 @@
 import React from "react";
-import request from "../../../services/requestServer.js";
+import request from "../../../services/requestServer";
 import Joi from "joi-browser";
 
 import { dispatch } from "../../../store/index.js";
 import { API_END_POINT } from "../../../config/constants.js";
-import { Button } from "../../../assets/styles/styledcomponents/component.js";
+import { Button } from "../styledcomponents/component";
 
-import Form from "../../common/form/form.jsx";
+import Form from "./form";
 
 const formItems = [
   {

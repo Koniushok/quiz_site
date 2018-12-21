@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { TableItem, BgTable, TableControl } from "./style";
-import { Button } from "../../../assets/styles/styledcomponents/component.js";
 import { Table } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import FormTask from "../form/formTask";
-import request from "../../../services/requestServer.js";
-import { API_END_POINT } from "../../../config/constants.js";
-import { dispatch } from "../../../store/index.js";
+
+import { TableItem, BgTable, TableControl } from "./style";
+import { Button } from "../../common/styledcomponents/component";
+import FormTask from "../../common/form/formTask";
+import request from "../../../services/requestServer";
+import { API_END_POINT } from "../../../config/constants";
+import { dispatch } from "../../../store/index";
 
 class UserTest extends Component {
   state = {

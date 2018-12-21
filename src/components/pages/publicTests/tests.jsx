@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import { BgTests, TableItem, Tdata, Divflex } from "./style.js";
-import {
-  Button,
-  TextInf
-} from "../../assets/styles/styledcomponents/component";
 import { connect } from "react-redux";
 import { Table } from "reactstrap";
 import { withRouter } from "react-router-dom";
-
-import PassTest from "../passTest/passTest.jsx";
 import _ from "lodash";
-import request from "../../services/requestServer.js";
-import { API_END_POINT } from "../../config/constants.js";
-import { dispatch } from "../../store/index.js";
+
+import { BgTests, TableItem, Tdata, Divflex } from "./style.js";
+import { Button, TextInf } from "../../common/styledcomponents/component";
+
+import PassTest from "../../passTest/passTest.jsx";
+
+import request from "../../../services/requestServer.js";
+import { API_END_POINT } from "../../../config/constants.js";
+import { dispatch } from "../../../store/index.js";
 
 class Tests extends Component {
   state = {

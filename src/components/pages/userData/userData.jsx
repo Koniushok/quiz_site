@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { BgUserData } from "./style";
-import { Title, TextInf, TitelInf } from "../style";
-import FomrUser from "../form/formUser.jsx";
-import { Button } from "../../../assets/styles/styledcomponents/component.js";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { BgUserData } from "./style";
+import { Title, TextInf, TitelInf } from "../profile/style";
+import FomrUser from "../../common/form/formUser";
+import { Button } from "../../common/styledcomponents/component";
 
 class UserData extends Component {
   state = {

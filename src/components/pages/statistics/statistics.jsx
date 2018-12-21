@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Bg, BlockStat } from "./style";
-import { Title, TextInf, TitelInf } from "../style";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
+import { Bg, BlockStat } from "./style";
+import { Title, TextInf, TitelInf } from "../profile/style";
 
 import request from "../../../services/requestServer";
 import { API_END_POINT } from "../../../config/constants";

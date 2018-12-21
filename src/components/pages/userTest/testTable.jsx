@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { TableItem, BgTable, TableForm, TableControl } from "./style";
-import { Button } from "../../../assets/styles/styledcomponents/component.js";
 import { Table } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
+import { TableItem, BgTable, TableForm, TableControl } from "./style";
+import { Button } from "../../common/styledcomponents/component";
 import request from "../../../services/requestServer.js";
 import { API_END_POINT } from "../../../config/constants.js";
 import { dispatch } from "../../../store/index.js";

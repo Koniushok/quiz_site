@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { BgUserTest } from "./style";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
+import { BgUserTest } from "./style";
 import TestTable from "./testTable";
 import TaskTable from "./taskTable";
-import { TextInf } from "../../../assets/styles/styledcomponents/component";
+import { TextInf } from "../../common/styledcomponents/component";
 
 class UserTest extends Component {
   state = {

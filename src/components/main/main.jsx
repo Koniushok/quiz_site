@@ -3,12 +3,15 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 //content pages
-import Profile from "../profile/profile.jsx";
-import logout from "../logout/logout.js";
-import Home from "./home/home.jsx";
-import Registration from "./registration/registration.jsx";
-import Authorization from "./authorization/authorization.jsx";
-import Tests from "../publicTests/tests.jsx";
+
+import {
+  Home,
+  Registration,
+  Profile,
+  Logout,
+  Tests,
+  Authorization
+} from "../pages/index";
 
 class Main extends Component {
   render() {
@@ -25,7 +28,7 @@ const userRouter = props => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/logout" component={logout} />
+      <Route path="/logout" component={Logout} />
       <Route path="/profile" component={Profile} />
       <Route path="/tests" component={Tests} />
       <Route component={Not_fount} />

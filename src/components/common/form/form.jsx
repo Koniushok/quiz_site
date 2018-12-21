@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import { Button } from "../../../assets/styles/styledcomponents/component";
+import { Button } from "../styledcomponents/component";
 import _ from "lodash";
 
 class Form extends Component {

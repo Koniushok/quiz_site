@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import request from "../../../services/requestServer.js";
 import { BgRegisration, FormRegistration } from "./style.js";
 import { API_END_POINT } from "../../../config/constants.js";
-import {
-  Button,
-  Title
-} from "../../../assets/styles/styledcomponents/component.js";
+import { Button, Title } from "../../common/styledcomponents/component";
 
 const formItems = [
   {

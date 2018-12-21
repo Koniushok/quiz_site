@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Sidebar from "./sidebar/sidebar.jsx";
-import { Switch, Route } from "react-router-dom";
-import { BgProfile } from "./style.js";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
+import Sidebar from "./sidebar/sidebar";
+import { BgProfile } from "./style";
+
 //page
-import UserData from "./userData/userData.jsx";
-import UserTest from "./userTest/userTest.jsx";
-import Statistics from "./statistics/statistics.jsx";
+import UserData from "../userData/userData";
+import UserTest from "../userTest/userTest";
+import Statistics from "../statistics/statistics";
 
 const urlProfile = "/profile";
 const MenuLinks = [

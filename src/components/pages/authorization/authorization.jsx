@@ -1,11 +1,9 @@
 import React, { Component } from "react";
+import { Input } from "mdbreact";
+
 import { authorization } from "../../../services/auth.js";
 import { BgAuthorization, FormAuth } from "./style.js";
-import { Input } from "mdbreact";
-import {
-  Button,
-  Title
-} from "../../../assets/styles/styledcomponents/component.js";
+import { Button, Title } from "../../common/styledcomponents/component";
 
 class Authorization extends Component {
   state = {

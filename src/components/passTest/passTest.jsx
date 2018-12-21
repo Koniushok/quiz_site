@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Bg, QuestionText, QuestionBlock, Title, Answer } from "./style.js";
-import { Button } from "../../assets/styles/styledcomponents/component.js";
+import { Button } from "../common/styledcomponents/component";
 
 import request from "../../services/requestServer";
 import { API_END_POINT } from "../../config/constants";
