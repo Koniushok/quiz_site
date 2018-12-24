@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
   res.send("Successfully registered");
 });
 
-router.post("/edit", auth, async (req, res) => {
+router.put("/edit", auth, async (req, res) => {
   const { error } = validateUpData(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 

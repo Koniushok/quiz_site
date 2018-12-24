@@ -23,7 +23,7 @@ class TestTable extends Component {
   handleTestAdd = async e => {
     e.preventDefault();
     try {
-      const result = await awaitaddTest(this.state.testName);
+      const result = await addTest(this.state.testName);
       this.setState({ testName: "" });
       dispatch("UPDATA_TEST", result.data);
     } catch (ex) {

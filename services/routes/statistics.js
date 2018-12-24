@@ -10,7 +10,7 @@ router.get("/", auth, async (req, res) => {
   res.send(user.statistics);
 });
 
-router.post("/publicTest", auth, async (req, res) => {
+router.put("/publicTest", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("statistics");
   if (!user) return res.status(400).send("no User");
 

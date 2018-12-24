@@ -23,7 +23,7 @@ router.get("/", auth, async (req, res) => {
   res.send(tests); //user.tests
 });
 
-router.post("/edit", auth, async (req, res) => {
+router.put("/edit", auth, async (req, res) => {
   const test = await Test.findById(req.body.id);
   test.name = req.body.name;
 
@@ -82,7 +82,7 @@ router.post("/task", auth, async (req, res) => {
   res.send(await getTests(req.user._id));
 });
 
-router.post("/task/edit", auth, async (req, res) => {
+router.put("/task/edit", auth, async (req, res) => {
   await Task.update(
     { _id: req.body.task._id },
     _.pick(req.body.task, [

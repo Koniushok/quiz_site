@@ -1,7 +1,7 @@
 import React from "react";
-import request from "../../../services/requestServer.js";
 import Joi from "joi-browser";
 
+import { dispatch } from "../../../store/index";
 import { addTask, editTask } from "../../../services/userTest";
 import { Button } from "../styledcomponents/component";
 

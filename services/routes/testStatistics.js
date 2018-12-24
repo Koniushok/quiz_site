@@ -5,7 +5,7 @@ const { Test } = require("../models/test");
 const express = require("express");
 const router = express.Router();
 
-router.post("/", auth, async (req, res) => {
+router.put("/", auth, async (req, res) => {
   const test = await Test.findById(req.body.testId);
   test.statistics.passes++;
   test.statistics.questions += req.body.questions;

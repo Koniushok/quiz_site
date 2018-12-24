@@ -12,7 +12,7 @@ export const addTask = async (task, testId) => {
 };
 
 export const editTask = async (task, testId) => {
-  return await request.post(API_END_POINT + url + "/task/edit", {
+  return await request.put(API_END_POINT + url + "/task/edit", {
     task,
     testId
   });
@@ -31,7 +31,7 @@ export const addTest = async testName => {
 };
 
 export const editTest = async (testNameEdit, testId) => {
-  return await request.post(API_END_POINT + "/api/userTest/edit", {
+  return await request.put(API_END_POINT + "/api/userTest/edit", {
     name: testNameEdit,
     id: testId
   });

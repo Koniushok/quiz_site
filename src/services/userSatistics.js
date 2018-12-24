@@ -9,7 +9,7 @@ export const getStatistics = async () => {
 };
 
 export const updateStatistics = async (numCorrect, length, id) => {
-  return request.post(API_END_POINT + "/api/statistics/publicTest", {
+  return request.put(API_END_POINT + "/api/statistics/publicTest", {
     correct: numCorrect,
     questions: length,
     testId: id

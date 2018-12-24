@@ -5,7 +5,7 @@ import request from "./requestServer.js";
 const url = "/api/testStatistics";
 
 export const updateTestStatistics = async (id, numCorrect, length) => {
-  return await request.post(API_END_POINT + "/api/testStatistics", {
+  return await request.put(API_END_POINT + "/api/testStatistics", {
     testId: id,
     correct: numCorrect,
     questions: length
