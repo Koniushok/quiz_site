@@ -57,6 +57,15 @@ class Form extends Component {
     );
   }
 
+  renderAlert(props) {
+    if (props.error)
+      return <div className="alert alert-danger">{props.error}</div>;
+    if (props.message)
+      return <div className="alert alert-success">{props.message}</div>;
+
+    return null;
+  }
+
   renderInput(inputObj) {
     return (
       <React.Fragment>

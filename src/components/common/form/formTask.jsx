@@ -6,6 +6,7 @@ import { addTask, editTask } from "../../../services/userTest";
 import { Button } from "../styledcomponents/component";
 
 import Form from "./form";
+import Alert from "../alert";
 
 const formItems = [
   {
@@ -117,13 +118,5 @@ class FormTask extends Form {
     );
   }
 }
-const Alert = props => {
-  if (props.error)
-    return <div className="alert alert-danger">{props.error}</div>;
-  if (props.message)
-    return <div className="alert alert-success">{props.message}</div>;
-
-  return null;
-};
 
 export default FormTask;

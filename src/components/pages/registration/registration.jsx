@@ -1,7 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
+import Joi from "joi-browser";
+
 import { addUser } from "../../../services/users";
 import { BgRegisration, FormRegistration } from "./style.js";
 import { Button, Title } from "../../common/styledcomponents/component";
+import Form from "../../common/form/form";
+import Alert from "../../common/alert";
 
 const formItems = [
   {
@@ -41,47 +45,33 @@ const formItems = [
   }
 ];
 
-class Registration extends Component {
+class Registration extends Form {
   state = {
-    account: {
+    data: {
       name: "",
       surname: "",
       email: "",
       login: "",
       password: ""
     },
-    error: {},
+    errors: {},
     result: ""
   };
-  handleChange = ({ currentTarget: input }) => {
-    const account = { ...this.state.account };
-    account[input.name] = input.value;
-    this.setState({ account });
+
+  schema = {
+    name: Joi.string().required(),
+    surname: Joi.string().required(),
+    email: Joi.string().required(),
+    login: Joi.string().required(),
+    password: Joi.string().required()
   };
-  handleSubmit = e => {
-    e.preventDefault();
-    if (this.validate()) this.PostRegisration(this.state.account);
-    else console.error("Registration hendle");
-  };
-  validate() {
-    let test = true;
-    const { account } = this.state;
-    const error = {};
-    for (let item in account) {
-      if (account[item].trim() === "") {
-        test = false;
-        error[item] = "required";
-      }
-    }
-    this.setState({ error });
-    return test;
-  }
-  PostRegisration = async account => {
+
+  doSubmit = async () => {
     try {
-      const result = await addUser(account);
+      const result = await addUser(this.state.data);
       this.setState({ result: result.data });
       this.setState({
-        account: {
+        data: {
           name: "",
           surname: "",
           email: "",
@@ -90,37 +80,22 @@ class Registration extends Component {
         }
       });
     } catch (ex) {
-      const error = { ...this.state.error };
+      const errors = { ...this.state.errors };
       console.log(ex.message);
-      error.all = ex.response.data;
-      this.setState({ error });
+      errors.all = ex.response.data;
+      this.setState({ errors });
     }
   };
 
   render() {
     return (
       <BgRegisration>
-        <Alert error={this.state.error.all} message={this.state.result} />
+        <Alert error={this.state.errors.all} message={this.state.result} />
         <FormRegistration onSubmit={this.handleSubmit}>
           <Title>Sign up</Title>
           {formItems.map(item => (
             <React.Fragment key={item.id}>
-              <label htmlFor={item.id} className="grey-text">
-                {item.label}
-              </label>
-              <input
-                name={item.name}
-                type={item.type}
-                id={item.id}
-                className={item.className}
-                onChange={this.handleChange}
-                value={this.state.account[item.name]}
-              />
-              {this.state.error[item.name] && (
-                <div className="alert alert-danger">
-                  {this.state.error[item.name]}
-                </div>
-              )}
+              {this.renderInput(item)}
             </React.Fragment>
           ))}
           <div className="text-center mt-4">
@@ -133,13 +108,5 @@ class Registration extends Component {
     );
   }
 }
-const Alert = props => {
-  if (props.error)
-    return <div className="alert alert-danger">{props.error}</div>;
-  if (props.message)
-    return <div className="alert alert-success">{props.message}</div>;
-
-  return null;
-};
 
 export default Registration;
