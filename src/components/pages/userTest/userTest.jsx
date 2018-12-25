@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { BgUserTest } from "./style";
 import TestTable from "./testTable";
 import TaskTable from "./taskTable";
+import { setUserTest } from "../../../services/userTest";
 import { TextInf } from "../../common/styledcomponents/component";
 
 class UserTest extends Component {
@@ -14,7 +15,9 @@ class UserTest extends Component {
     taskFormActive: false,
     taskEdit: false
   };
-
+  componentDidMount() {
+    setUserTest();
+  }
   onTaskForm = () => {
     const active = !this.state.taskFormActive;
     this.setState({ taskFormActive: active, taskEdit: false });

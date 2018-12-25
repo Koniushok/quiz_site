@@ -40,3 +40,12 @@ export const editTest = async (testNameEdit, testId) => {
 export const deleteTest = async testId => {
   return await request.delete(API_END_POINT + "/api/userTest/" + testId);
 };
+
+export async function setUserTest() {
+  try {
+    const result = await request.get(API_END_POINT + "/api/userTest");
+    dispatch("UPDATA_TEST", result.data);
+  } catch (ex) {
+    console.error(ex);
+  }
+}

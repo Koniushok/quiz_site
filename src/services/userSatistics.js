@@ -15,3 +15,12 @@ export const updateStatistics = async (numCorrect, length, id) => {
     testId: id
   });
 };
+
+export async function setUserStatistics() {
+  try {
+    const result = await request.get(API_END_POINT + "/api/statistics");
+    dispatch("UPDATA_STATICTICS", result.data);
+  } catch (ex) {
+    console.error(ex);
+  }
+}

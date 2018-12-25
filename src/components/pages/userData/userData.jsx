@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
 import { BgUserData } from "./style";
 import { Title, TextInf, TitelInf } from "../profile/style";
 import FomrUser from "../../common/form/formUser";
+import InfTable from "../../common/infTable/infTable";
 import { Button } from "../../common/styledcomponents/component";
 
 class UserData extends Component {
@@ -30,12 +32,7 @@ class UserData extends Component {
         {this.state.editing ? (
           <FomrUser account={account} />
         ) : (
-          <React.Fragment>
-            <LabelInf title="Email" value={user.email} />
-            <LabelInf title="Login" value={user.login} />
-            <LabelInf title="Name" value={user.name} />
-            <LabelInf title="Surname" value={user.surname} />
-          </React.Fragment>
+          <InfTable obj={account} />
         )}
         <Button
           width="150px"

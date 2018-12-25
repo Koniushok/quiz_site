@@ -54,13 +54,14 @@ class TestTable extends Component {
   };
 
   render() {
-    const { user } = this.props.state;
+    const { user, myTests } = this.props.state;
 
     return (
       <BgTable>
         <h2>List your Test:</h2>
         <TableList
           user={user}
+          tests={myTests}
           testsActive={this.props.testsActive}
           СhoiceTest={this.props.СhoiceTest}
         />
@@ -96,7 +97,7 @@ class TestTable extends Component {
 }
 
 const TableList = props => {
-  const { user, testsActive, СhoiceTest } = props;
+  const { user, testsActive, СhoiceTest, tests } = props;
   return (
     <Table>
       <thead>
@@ -108,7 +109,7 @@ const TableList = props => {
         </tr>
       </thead>
       <tbody>
-        {user.tests.map((test, index) => (
+        {tests.map((test, index) => (
           <TableItem
             active={testsActive && testsActive._id === test._id}
             key={test._id}

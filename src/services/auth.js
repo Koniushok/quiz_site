@@ -1,6 +1,8 @@
 import request from "./requestServer.js";
 import { dispatch } from "../store/index.js";
 import { API_END_POINT } from "../config/constants.js";
+import { setUserStatistics } from "./userSatistics";
+import { setUserTest } from "./userTest";
 
 const url = "/api/auth";
 
@@ -17,26 +19,8 @@ export async function login() {
     console.log("login:", data);
     dispatch("ADD_USER", data);
 
-    await getStatistics();
-    await getUserTest();
-  } catch (ex) {
-    console.error(ex);
-  }
-}
-
-export async function getStatistics() {
-  try {
-    const result = await request.get(API_END_POINT + "/api/statistics");
-    dispatch("UPDATA_STATICTICS", result.data);
-  } catch (ex) {
-    console.error(ex);
-  }
-}
-
-export async function getUserTest() {
-  try {
-    const result = await request.get(API_END_POINT + "/api/userTest");
-    dispatch("UPDATA_TEST", result.data);
+    await setUserStatistics();
+    //await setUserTest();
   } catch (ex) {
     console.error(ex);
   }

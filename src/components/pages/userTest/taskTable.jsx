@@ -29,6 +29,7 @@ class UserTest extends Component {
 
   render() {
     const { user } = this.props.state;
+    const { myTests } = this.props.state;
     return (
       <BgTable>
         {this.props.formActive ? (
@@ -47,8 +48,7 @@ class UserTest extends Component {
             <h2>{this.props.testsActive.name + "(List tasks):"}</h2>
             <TableTask
               tasks={
-                user.tests[GetIndexTest(user.tests, this.props.testsActive._id)]
-                  .tasks
+                myTests[GetIndexTest(myTests, this.props.testsActive._id)].tasks
               }
               taskActive={this.props.taskActive}
               Сhoicetask={this.props.СhoiceTask}
